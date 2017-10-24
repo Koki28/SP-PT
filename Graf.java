@@ -4,33 +4,26 @@ import java.util.ArrayList;
 
 public class Graf {
 
-	ArrayList <Uzel> uzly;
-	ArrayList <Propojeni> propojeni;
+	ArrayList <Vrchol> vrcholy;
+	ArrayList <Hrana> hrany;
 	
-	public Graf(ArrayList <Uzel> uzly, ArrayList <Propojeni> propojeni) {
+	public Graf(ArrayList <Vrchol> vrcholy, ArrayList <Hrana> hrany) {
 		
-		this.uzly = uzly;
-		this.propojeni = propojeni;
+		this.vrcholy = new ArrayList <Vrchol>();
+		this.hrany = new ArrayList <Hrana>();
 	}
 	
-	// ?
-	
-	public void pridejUzel(int id) {
+	public void pridejVrchol(int id) {
 		
-		Uzel novyUzel = new Uzel(id);
+		Vrchol novyVrchol = new Vrchol(id);
 		
-		novyUzel.id = id;
+		vrcholy.add(novyVrchol);
 	}
 	
-	// ?
-	
-	public void pridejPropojeni(Uzel pocatecniUzel, Uzel koncovyUzel, int propustnost, double chybovost) {
+	public void pridejHranu(Vrchol pocatecniUzel, Vrchol koncovyUzel, int propustnost, double chybovost) {
 		
-		Propojeni novePropojeni = new Propojeni(pocatecniUzel, koncovyUzel, propustnost, chybovost);
+		Hrana novaHrana = new Hrana(pocatecniUzel, koncovyUzel, propustnost, chybovost);
 		
-		novePropojeni.pocatecniUzel = pocatecniUzel;
-		novePropojeni.koncovyUzel = koncovyUzel;
-		novePropojeni.propustnost = propustnost;
-		novePropojeni.chybovost = chybovost;
+		//novaHrana.sousedi.(koncovyUzel);
 	}
 }

@@ -1,13 +1,13 @@
 package sp;
 
-public class Propojeni {
+public class Hrana {
 
-	Uzel pocatecniUzel;
-	Uzel koncovyUzel;
+	Vrchol pocatecniUzel;
+	Vrchol koncovyUzel;
 	int propustnost;
 	double chybovost;
 	
-	public Propojeni(Uzel pocatecniUzel, Uzel koncovyUzel, int propustnost, double chybovost) {
+	public Hrana(Vrchol pocatecniUzel, Vrchol koncovyUzel, int propustnost, double chybovost) {
 		
 		this.pocatecniUzel = pocatecniUzel;
 		this.koncovyUzel = koncovyUzel;
