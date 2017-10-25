@@ -1,7 +1,0 @@
-Poslední vìc, která bude potøeba udìlat, abychom mìli hotovou "strukturu sítì" je metoda pridejHranu().
-Bude muset obsahovat v tìle metody sousedy, abychom to udìlali bude zapotøebí nìco jako getVrchol() myslím,
-dále kontroluju, jestli už daný vrchol s id není vytvoøený a co dìlat když vytvoøený je.
-
-Pak vlastnì ještì nìco v mainu...a nakonec samotný hledání nejkratší cesty.
-
-P.S. Máme to sice podobný jako holky, ale myslím si, že zatím ta struktura se moc jinak psát nedá.
