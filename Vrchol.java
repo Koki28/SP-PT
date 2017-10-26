@@ -25,7 +25,6 @@ public class Vrchol {
 		return uzel;
 	}
 	
-	// možná getId()? - zatím není proè
 	
 /*	public static void vypisSousedy() {
 		

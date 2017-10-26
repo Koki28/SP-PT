@@ -17,7 +17,7 @@ public class Hrana {
 	
 	public String toString() {
 		
-		String propojeni = "ID_UZLU_" + pocatecniUzel + " - ID_UZLU_" + koncovyUzel + " - " + propustnost + " - " + chybovost;
+		String propojeni = pocatecniUzel + " - " + koncovyUzel + " - " + propustnost + " - " + chybovost;
 		
 		return propojeni;
 	}

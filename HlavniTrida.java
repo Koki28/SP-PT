@@ -6,6 +6,5 @@ public class HlavniTrida {
 
 		NacitaniVstupnihoSouboru.nactiVstup();
 		
-		//Vrchol.vypisSousedy();
 	}
 }

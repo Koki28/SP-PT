@@ -48,7 +48,7 @@ public class Graf {
 		
 		for (int i = 0; i < vrcholy.size(); i++) {
 			
-			if(vrcholy.get(i).id == id) { //getID()?
+			if(vrcholy.get(i).id == id) {
 				
 				vrchol = vrcholy.get(i);
 			}
@@ -61,6 +61,16 @@ public class Graf {
 		
 		Hrana novaHrana = new Hrana(pocatecniUzel, koncovyUzel, propustnost, chybovost);
 		
+		hrany.add(novaHrana);
+		
 		//novaHrana.sousedi.(koncovyUzel);
 	}
+	
+	public void vypisHrany() {
+		for (int i = 0; i < hrany.size(); i++) {
+			System.out.println(hrany.get(i) + " ");
+			
+		}
+	}
 }
+
