@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Graf {
 
-	ArrayList <Vrchol> vrcholy;
+	public ArrayList <Vrchol> vrcholy;
 	ArrayList <Hrana> hrany;
 	
 	public Graf() {
@@ -14,50 +14,54 @@ public class Graf {
 	}
 	
 	public void pridejVrchol(int id) {
+		
 		int fail = 0;
 		Vrchol novyVrchol = new Vrchol(id);
 		
-		if (vrcholy.size() == 0)
-		vrcholy.add(novyVrchol);
+		if(vrcholy.size() == 0) {
 		
-		for (int i = 0; i < vrcholy.size(); i++) {
+			vrcholy.add(novyVrchol);
+		}
+		
+		for(int i = 0; i < vrcholy.size(); i++) {
 			
 			if (vrcholy.get(i).getId() == id) {
+				
 				fail = 1;
 			}
 		}
-		if (fail == 0)
-				vrcholy.add(novyVrchol);
 		
-		/*if (!vrcholy.contains("ID uzlu :" + id)) 
-		
-		vrcholy.add(novyVrchol);*/
+		if(fail == 0) {
+				
+			vrcholy.add(novyVrchol);	
+		}
 	}
 	
 	public void vypisVrcholy() {
-		for (int i = 0; i < vrcholy.size(); i++) {
-			System.out.println(vrcholy.get(i) + " ");
-			
-		}
 		
+		for (int i = 0; i < vrcholy.size(); i++) {
+			
+			System.out.println(vrcholy.get(i) + " ");
+		}
 	}
 	
-	public void sousedujVrcholy(Vrchol prvni, Vrchol druhy) {
+	public void sousedniVrcholy(Vrchol prvni, Vrchol druhy) {
 		
 		prvni.sousedi.add(druhy);
-		druhy.sousedi.add(prvni);
-		
+		druhy.sousedi.add(prvni);	
 	}
 	
 	public void vypisSousedy(Vrchol vrchol) {
 		
 		System.out.println("Sousedi vrcholu " + vrchol + " jsou: ");
-		for (int i = 0; i < vrchol.sousedi.size(); i++)
-			System.out.println("uzel --- "  + vrchol.sousedi.get(i) + "");
+		
+		for (int i = 0; i < vrchol.sousedi.size(); i++) {
+			
+			System.out.println("soused ---> "  + vrchol.sousedi.get(i) + "");
+		}
+		
 		System.out.println("vse..");
 		System.out.println();
-		
-		
 	}
 	
 	Vrchol getVrchol(int id) {
@@ -80,15 +84,13 @@ public class Graf {
 		Hrana novaHrana = new Hrana(pocatecniUzel, koncovyUzel, propustnost, chybovost);
 		
 		hrany.add(novaHrana);
-		
-		//novaHrana.sousedi.(koncovyUzel);
 	}
 	
 	public void vypisHrany() {
+		
 		for (int i = 0; i < hrany.size(); i++) {
-			System.out.println(hrany.get(i) + " ");
 			
+			System.out.println(hrany.get(i) + " ");
 		}
 	}
 }
-

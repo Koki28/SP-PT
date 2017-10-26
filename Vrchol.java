@@ -20,25 +20,13 @@ public class Vrchol {
 	@Override
 	public String toString() {
 		
-		String uzel = "ID uzlu :" + id;
+		String uzel = "ID uzlu: " + id;
 		
 		return uzel;
 	}
 	
-	
-/*	public static void vypisSousedy() {
-		
-		System.out.println("Sousedi " + id + ". uzlu:");
-		
-		for(int i = 0; i < sousedi.size(); i++) {
-			
-			System.out.println(i);
-		} 
-	} */
-	
 	public int getId() {
 		
 		return id;
-		
 	}
 }
