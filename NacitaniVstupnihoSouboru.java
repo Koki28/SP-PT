@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class NacitaniVstupnihoSouboru {
 
-	public static ArrayList<Integer> vsechnyVrcholy;
+	public static ArrayList <Vrchol> vsechnyVrcholy;
 	
 	public static void nactiVstup() {
 		
@@ -16,7 +16,7 @@ public class NacitaniVstupnihoSouboru {
 			
 			String radkaVstupu;
 			
-			vsechnyVrcholy = new ArrayList<Integer>();
+			vsechnyVrcholy = new ArrayList <Vrchol>();
 			
 			while ((radkaVstupu = br.readLine()) != null) {
 				
@@ -27,24 +27,27 @@ public class NacitaniVstupnihoSouboru {
 				int propustnost = Integer.parseInt(data [2]);
 				double chybovost = Double.parseDouble(data [3]);
 				
-				if(!(vsechnyVrcholy.contains(pocatecniUzel))) {
+				Vrchol kokot = new Vrchol(pocatecniUzel);
+				Vrchol curak = new Vrchol(koncovyUzel);
+				
+				if(!(vsechnyVrcholy.contains(kokot))) {
 					
-					vsechnyVrcholy.add(pocatecniUzel);
+					vsechnyVrcholy.add(kokot);
 				}
 				
-				if(!(vsechnyVrcholy.contains(koncovyUzel))) {
+				if(!(vsechnyVrcholy.contains(curak))) {
 					
-					vsechnyVrcholy.add(koncovyUzel);
+					vsechnyVrcholy.add(curak);
 				} 
 				
 				System.out.println("ID_UZLU_" + pocatecniUzel + " - ID_UZLU_" + koncovyUzel + " - " + propustnost + " - " + chybovost);	
 				
 		    }
-			
+			System.out.println(vsechnyVrcholy.size());
 			for (int i = 0; i < vsechnyVrcholy.size(); i++) {
 				
-				System.out.println(vsechnyVrcholy.get(i));
-			}
+				System.out.println(vsechnyVrcholy.get(i) + "");
+			} 
 			
 			
 		} catch(FileNotFoundException e) {

@@ -5,16 +5,16 @@ import java.util.Stack;
 
 public class Vrchol {
 
-	public static int id;
-	public Stack<?> zasobnik;
-	public int kapacita;
-	public static ArrayList <Vrchol> sousedi;
-	public boolean prazdny; // napul k nicemu, je potreba videt kolik je mista a kolik se vejde
+	public int id;
+    public Stack<?> zasobnik; // doplníme nejspíš jinak
+	public ArrayList <Vrchol> sousedi;
 	
-	public Vrchol(int id) { //doplni se pozdeji
+	
+	public Vrchol(int id) {
 		
-		Vrchol.id = id;
-		Vrchol.sousedi = new ArrayList <Vrchol>();
+		this.id = id;
+		this.sousedi = new ArrayList <Vrchol>();
+      //založení našeho zásobníku
 	}
 	
 	@Override
@@ -25,7 +25,9 @@ public class Vrchol {
 		return uzel;
 	}
 	
-	public static void vypisSousedy() {
+	// možná getId()? - zatím není proè
+	
+/*	public static void vypisSousedy() {
 		
 		System.out.println("Sousedi " + id + ". uzlu:");
 		
@@ -33,5 +35,5 @@ public class Vrchol {
 			
 			System.out.println(i);
 		} 
-	}
+	} */
 }

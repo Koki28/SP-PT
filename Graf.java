@@ -20,6 +20,21 @@ public class Graf {
 		vrcholy.add(novyVrchol);
 	}
 	
+	Vrchol getVrchol(int id) {
+		
+		Vrchol vrchol = null;
+		
+		for (int i = 0; i < vrcholy.size(); i++) {
+			
+			if(vrcholy.get(i).id == id) { //getID()?
+				
+				vrchol = vrcholy.get(i);
+			}
+		}
+		
+		return vrchol;
+	}
+	
 	public void pridejHranu(Vrchol pocatecniUzel, Vrchol koncovyUzel, int propustnost, double chybovost) {
 		
 		Hrana novaHrana = new Hrana(pocatecniUzel, koncovyUzel, propustnost, chybovost);
