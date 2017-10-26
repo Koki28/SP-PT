@@ -18,6 +18,7 @@ public class NacitaniVstupnihoSouboru {
 			
 			vsechnyVrcholy = new ArrayList <Vrchol>();
 			
+			Graf graf = new Graf();
 			while ((radkaVstupu = br.readLine()) != null) {
 				
 				String [] data = radkaVstupu.split(" - ");
@@ -27,27 +28,33 @@ public class NacitaniVstupnihoSouboru {
 				int propustnost = Integer.parseInt(data [2]);
 				double chybovost = Double.parseDouble(data [3]);
 				
-				Vrchol kokot = new Vrchol(pocatecniUzel);
-				Vrchol curak = new Vrchol(koncovyUzel);
+				graf.pridejVrchol(pocatecniUzel);
+				graf.pridejVrchol(koncovyUzel);
 				
-				if(!(vsechnyVrcholy.contains(kokot))) {
+				/*Vrchol prvni = new Vrchol(pocatecniUzel);
+				Vrchol druhy = new Vrchol(koncovyUzel);
+				
+				if(!(vsechnyVrcholy.contains(prvni))) {
 					
-					vsechnyVrcholy.add(kokot);
+					
+					vsechnyVrcholy.add(prvni);
 				}
 				
-				if(!(vsechnyVrcholy.contains(curak))) {
+				if(!(vsechnyVrcholy.contains(druhy))) {
 					
-					vsechnyVrcholy.add(curak);
-				} 
+					vsechnyVrcholy.add(druhy);
+				} */
 				
-				System.out.println("ID_UZLU_" + pocatecniUzel + " - ID_UZLU_" + koncovyUzel + " - " + propustnost + " - " + chybovost);	
+				//System.out.println("ID_UZLU_" + pocatecniUzel + " - ID_UZLU_" + koncovyUzel + " - " + propustnost + " - " + chybovost);	
 				
 		    }
-			System.out.println(vsechnyVrcholy.size());
+			graf.vypisVrcholy();
+			
+		/*	System.out.println(vsechnyVrcholy.size());
 			for (int i = 0; i < vsechnyVrcholy.size(); i++) {
 				
 				System.out.println(vsechnyVrcholy.get(i) + "");
-			} 
+			} */
 			
 			
 		} catch(FileNotFoundException e) {

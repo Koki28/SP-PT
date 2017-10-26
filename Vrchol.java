@@ -36,4 +36,10 @@ public class Vrchol {
 			System.out.println(i);
 		} 
 	} */
+	
+	public int getId() {
+		
+		return id;
+		
+	}
 }
