@@ -33,6 +33,10 @@ public class NacitaniVstupnihoSouboru {
 				
 				graf.pridejHranu(graf.getVrchol(pocatecniUzel), graf.getVrchol(koncovyUzel), propustnost, chybovost);
 				
+				graf.sousedujVrcholy(graf.getVrchol(pocatecniUzel), graf.getVrchol(koncovyUzel));
+				
+				graf.vypisSousedy(graf.getVrchol(pocatecniUzel));
+				
 				/*Vrchol prvni = new Vrchol(pocatecniUzel);
 				Vrchol druhy = new Vrchol(koncovyUzel);
 				
@@ -47,7 +51,7 @@ public class NacitaniVstupnihoSouboru {
 					vsechnyVrcholy.add(druhy);
 				} */
 				
-				//System.out.println("ID_UZLU_" + pocatecniUzel + " - ID_UZLU_" + koncovyUzel + " - " + propustnost + " - " + chybovost);	
+				System.out.println("ID_UZLU_" + pocatecniUzel + " - ID_UZLU_" + koncovyUzel + " - " + propustnost + " - " + chybovost);	
 				
 		    }
 			graf.vypisVrcholy();

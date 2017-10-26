@@ -42,6 +42,24 @@ public class Graf {
 		
 	}
 	
+	public void sousedujVrcholy(Vrchol prvni, Vrchol druhy) {
+		
+		prvni.sousedi.add(druhy);
+		druhy.sousedi.add(prvni);
+		
+	}
+	
+	public void vypisSousedy(Vrchol vrchol) {
+		
+		System.out.println("Sousedi vrcholu " + vrchol + " jsou: ");
+		for (int i = 0; i < vrchol.sousedi.size(); i++)
+			System.out.println("uzel --- "  + vrchol.sousedi.get(i) + "");
+		System.out.println("vse..");
+		System.out.println();
+		
+		
+	}
+	
 	Vrchol getVrchol(int id) {
 		
 		Vrchol vrchol = null;
