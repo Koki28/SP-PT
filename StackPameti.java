@@ -6,34 +6,34 @@ public class StackPameti {
 	public final int MAX_PAMET = 100;
 	
 	public StackPameti() {
-		this.soucet = soucet;
-	
 		
+		this.soucet = soucet;
 	}
 	
 	public void pridatPamet(int pridanaPamet) {
 		
-		if (kontrolaPameti(pridanaPamet))
+		if (kontrolaPameti(pridanaPamet)) {
+			
 			soucet += pridanaPamet;
-		
-		else
+			
+		} else {
+			
 			posliZnovuData();
-
+		}
 	}
 	
 	public boolean kontrolaPameti(int pridanaPamet) {
 		
-		 if ((pridanaPamet + soucet) > MAX_PAMET) {
-			 return false;
-		 }
+		if ((pridanaPamet + soucet) > MAX_PAMET) {
+			 
+			return false;
+		}
 		
-		return true;
-		
+		return true;	
 	}
 	
 	public void posliZnovuData() {
 		
 		// ????
 	}
-	
 }

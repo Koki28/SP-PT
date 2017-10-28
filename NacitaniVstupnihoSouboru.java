@@ -45,7 +45,6 @@ public class NacitaniVstupnihoSouboru {
 			for(int i = 1; i < pocet; i++) {
 				
 				graf.vypisSousedy(graf.getVrchol(i));
-
 			}
 			
 		} catch(FileNotFoundException e) {
