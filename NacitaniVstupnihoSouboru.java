@@ -6,18 +6,28 @@ import java.io.FileReader;
 import java.io.IOException;
 //import java.util.Scanner;
 
+/**
+ * Tøída naèítající vstupní hodnoty poèítaèové sítì.
+ * Naètené hodnoty se poté vloží do grafu.
+ *
+ * @author  Pavel Prùcha a Tomáš Slíva
+ */
 public class NacitaniVstupnihoSouboru {
 	
+	/** Graf poèítaèové sítì */
 	public static Graf graf;
 	
 	//public static Scanner sc = new Scanner(System.in);
 
+	/**
+	* Metoda naèítá po øádcích vstupní hodnoty ze
+	* souboru, které posléze vkládá do grafu.
+	*/
 	public static void nactiVstup() {
 		
 	//	System.out.println("Naspište název souboru vstupních dat: ");
 	//	String vstup = sc.next();
 	//	try (BufferedReader br = new BufferedReader(new FileReader(vstup))) {
-			
 			
 		try (BufferedReader br = new BufferedReader(new FileReader("vstupTest.txt"))) {
 		
@@ -55,7 +65,6 @@ public class NacitaniVstupnihoSouboru {
 			for(int i = 1; i < pocet; i++) {
 				
 				graf.vypisSousedy(graf.getVrchol(i));
-
 			}
 			
 		} catch(FileNotFoundException e) {
@@ -69,6 +78,11 @@ public class NacitaniVstupnihoSouboru {
 		}
 	}
 	
+   /**
+	* Vrací graf, tedy jeho seznam vrcholù a hran.
+	* 
+	* @return  Vytvoøený graf.
+	*/
 	public static Graf getGraf() {
 		
 		return graf;

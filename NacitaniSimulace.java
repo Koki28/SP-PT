@@ -7,13 +7,24 @@ import java.io.IOException;
 import java.util.ArrayList;
 //import java.util.Scanner;
 
+/**
+ * Tøída naèítající hodnoty simulace prùtoku dat poèítaèovu sítí.
+ * Výsledkem této tøídy je nejkratší cesta mezi zadanými vrcholy.
+ *
+ * @author  Pavel Prùcha a Tomáš Slíva
+ */
 public class NacitaniSimulace {
 
 //	public static Scanner sc = new Scanner(System.in);
 	
+	/**
+	* Metoda naèítá po øádcích vstupní hodnoty ze souboru. 
+	* Ty jsou poté zpracovány a získáme nejkratší cestu 
+	* mezi zadanými vrcholy.
+	*/
 	public static void nactiSimulaci() {
 		
-		ArrayList<Simulace> simulaceData = new ArrayList <Simulace>();
+		ArrayList <Simulace> simulaceData = new ArrayList <Simulace>();
 		
 	//	System.out.println("Naspište název souboru simulace: ");
 	//	String simulace = sc.next();
@@ -45,9 +56,6 @@ public class NacitaniSimulace {
 				cesta.najdiCestu(zdrojV, cilV);
 				
 				cesta.vypisCestu();
-				
-				
-				
 		    }
 	
 		} catch(FileNotFoundException e) {

@@ -36,6 +36,11 @@ public class Hrana {
 		this.chybovost = chybovost;
 	}
 	
+   /**
+	* Pøevede instanci na øetìzec obsahující poèáteèní uzel hrany, koncový uzel, její propustnost a chybovost.
+	* 
+	* @return Øetìzcová reprezentace dané hrany.
+	*/
 	public String toString() {
 		
 		String propojeni = pocatecniUzel + " - " + koncovyUzel + " - " + propustnost + " - " + chybovost;

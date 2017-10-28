@@ -17,21 +17,21 @@ public class Simulace {
 
 	public int getCas() {
 		
-		return cas;
+		return this.cas;
 	}
 
 	public int getZdroj() {
 		
-		return zdroj;
+		return this.zdroj;
 	}
 	
 	public int getCil() {
 		
-		return cil;
+		return this.cil;
 	}
 	
 	public int getData() {
 		
-		return data;
+		return this.data;
 	}
 }
