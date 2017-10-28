@@ -1,8 +1,6 @@
 package sp;
 
-import java.util.Stack;
-
-public class StackPameti extends Stack {
+public class StackPameti {
 
 	public int soucet;
 	public final int MAX_PAMET = 100;
