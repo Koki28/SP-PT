@@ -22,12 +22,12 @@ public class NacitaniSimulace {
 		try(BufferedReader br = new BufferedReader(new FileReader("simulaceTest.txt"))) {
 			
 			String radkaSimulace;
-			
-			Cesta cesta = new Cesta();
-			
-			Graf graf = new Graf();
+						
+			Graf graf = NacitaniVstupnihoSouboru.getGraf();
 			
 			while ((radkaSimulace = br.readLine()) != null) {
+			
+				Cesta cesta = new Cesta();
 				
 				String [] pole = radkaSimulace.split(" - ");
 				
@@ -44,7 +44,7 @@ public class NacitaniSimulace {
 				
 				cesta.najdiCestu(zdrojV, cilV);
 				
-				//cesta.vypisCestu();
+				cesta.vypisCestu();
 				
 				
 				

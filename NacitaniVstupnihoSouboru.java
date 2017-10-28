@@ -8,6 +8,8 @@ import java.io.IOException;
 
 public class NacitaniVstupnihoSouboru {
 	
+	public static Graf graf;
+	
 	//public static Scanner sc = new Scanner(System.in);
 
 	public static void nactiVstup() {
@@ -22,7 +24,7 @@ public class NacitaniVstupnihoSouboru {
 			String radkaVstupu;
 			int pocet = 0;
 			
-			Graf graf = new Graf();
+			graf = new Graf();
 			
 			while ((radkaVstupu = br.readLine()) != null) {
 				
@@ -65,5 +67,10 @@ public class NacitaniVstupnihoSouboru {
 		
 			e.printStackTrace();
 		}
+	}
+	
+	public static Graf getGraf() {
+		
+		return graf;
 	}
 }
