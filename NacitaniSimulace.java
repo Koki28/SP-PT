@@ -5,16 +5,27 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+//import java.util.Scanner;
 
 public class NacitaniSimulace {
 
+//	public static Scanner sc = new Scanner(System.in);
+	
 	public static void nactiSimulaci() {
 		
 		ArrayList<Simulace> simulaceData = new ArrayList <Simulace>();
 		
+	//	System.out.println("Naspište název souboru simulace: ");
+	//	String simulace = sc.next();
+	//	try (BufferedReader br = new BufferedReader(new FileReader(simulace))) {
+		
 		try(BufferedReader br = new BufferedReader(new FileReader("simulaceTest.txt"))) {
 			
 			String radkaSimulace;
+			
+			Cesta cesta = new Cesta();
+			
+			Graf graf = new Graf();
 			
 			while ((radkaSimulace = br.readLine()) != null) {
 				
@@ -27,6 +38,16 @@ public class NacitaniSimulace {
 				
 				simulaceData.add(new Simulace(cas, zdroj, cil, data));
 				System.out.println("Cas: " + cas + " - zdroj: " + zdroj + " - cil: " + cil + " - data: " + data);	
+				
+				Vrchol zdrojV = graf.getVrchol(zdroj);
+				Vrchol cilV = graf.getVrchol(cil);
+				
+				cesta.najdiCestu(zdrojV, cilV);
+				
+				//cesta.vypisCestu();
+				
+				
+				
 		    }
 	
 		} catch(FileNotFoundException e) {
