@@ -6,7 +6,6 @@ package sp;
  *
  * @author  Pavel Prùcha a Tomáš Slíva
  */
-
 public class Hrana {
 
 	/** Poèáteèní uzel hrany. */
@@ -20,7 +19,6 @@ public class Hrana {
 	
 	/** Chybovost hrany. */
 	double chybovost;
-	
 	
 	/**
      * Konstruktor vytváøející spojení mezi uzly poèítové sítì.

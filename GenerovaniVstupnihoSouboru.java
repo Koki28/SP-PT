@@ -9,16 +9,14 @@ import java.util.Random;
  *
  * @author  Pavel Prùcha a Tomáš Slíva
  */
-
 public class GenerovaniVstupnihoSouboru {
 
 	private static Random r = new Random(); 
 
-   /**
+	/**
 	* Metoda generující vstupní soubor poèítaèové sítì topologie mesh.
 	* Každý uzel sítì je propojený se všemi ostatními uzly naší sítì.
 	*/
-	
 	public static void generujVstupniSoubor() {
 
 		for(int i = 1; i < 10; i++) {
@@ -56,3 +54,4 @@ public class GenerovaniVstupnihoSouboru {
 		System.out.println("KONEEEEEC!!!!");
 	}
 }
+

@@ -15,7 +15,7 @@ public class Graf {
 	
 	public void pridejVrchol(int id) {
 		
-		int fail = 0;
+		boolean fail = false;
 		Vrchol novyVrchol = new Vrchol(id);
 		
 		if(vrcholy.size() == 0) {
@@ -27,11 +27,11 @@ public class Graf {
 			
 			if (vrcholy.get(i).getId() == id) {
 				
-				fail = 1;
+				fail = true;
 			}
 		}
 		
-		if(fail == 0) {
+		if(!fail) {
 				
 			vrcholy.add(novyVrchol);	
 		}
@@ -59,9 +59,7 @@ public class Graf {
 			
 			System.out.println("soused ---> "  + vrchol.sousedi.get(i) + "");
 		}
-		
-		System.out.println("vse..");
-		System.out.println();
+			System.out.println();
 	}
 	
 	Vrchol getVrchol(int id) {

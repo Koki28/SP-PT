@@ -6,7 +6,7 @@ import java.util.Stack;
 public class Vrchol {
 
 	public int id;
-    public Stack<?> zasobnik; // doplníme nejspíš jinak
+    public StackPameti stack;
 	public ArrayList <Vrchol> sousedi;
 	
 	
@@ -14,7 +14,8 @@ public class Vrchol {
 		
 		this.id = id;
 		this.sousedi = new ArrayList <Vrchol>();
-      //založení našeho zásobníku
+		this.stack = new StackPameti();
+
 	}
 	
 	@Override
