@@ -5,31 +5,34 @@ import java.util.ArrayList;
 public class Cesta {
 
 	private ArrayList<Vrchol> nejkratsiCesta;
-	private ArrayList<Vrchol> pouzivanaCestaChceToJinyNazev;
+	private ArrayList<Vrchol> prochazenaCesta;
+	private Graf graf = NacitaniVstupnihoSouboru.getGraf();
 	private Hrana hrana;
+	
 
 	public Cesta() {
 
 		this.nejkratsiCesta = new ArrayList<Vrchol>();
-		this.pouzivanaCestaChceToJinyNazev = new ArrayList<Vrchol>();
+		this.prochazenaCesta = new ArrayList<Vrchol>();
 	}
 
 	public void najdiCestu(Vrchol zdroj, Vrchol cil) {
 		
 		Vrchol vrchol = zdroj;
-		int index = 0;
+			
+			for (int i = 0; i < zdroj.sousedi.size(); i++) {
+				
+			Vrchol soused = zdroj.sousedi.get(i);
+			hrana = graf.getHrana(vrchol, soused);
+			
+			prochazenaCesta.add(vrchol);
+			prochazenaCesta.add(soused);
+			
+			
+			
+			
+			}
 		
-		while(vrchol.sousedi.get(index) == null) {
-			
-			Vrchol soused = zdroj.sousedi.get(index);
-			hrana = new Hrana();
-			
-			
-			
-			
-		}
-		zdroj.sousedi.get();
-		// nejakej ten dijkstra ??
 		
 	
 	

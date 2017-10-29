@@ -94,24 +94,18 @@ public class Graf {
 
 	public Hrana getHrana(Vrchol pocatecni, Vrchol koncovy) {
 
-		System.out.println(pocatecni.getId());
-		System.out.println(koncovy.getId());
 		Hrana hrana = null;
-		boolean mameHranu = false;
+
 		for (int i = 0; i < hrany.size(); i++) {
 
-			for (int j = 0; j < hrany.get(i).getPocatecni().sousedi.size(); j++) {
-				if (hrany.get(i).getPocatecni().sousedi.get(j).getId() == koncovy.getId()) {
+			if ((hrany.get(i).getPocatecni().getId() == pocatecni.getId()) && (hrany.get(i).getKoncovy().getId() == koncovy.getId()) || 
+					(hrany.get(i).getPocatecni().getId() == koncovy.getId()) && (hrany.get(i).getKoncovy().getId() == pocatecni.getId())) {
 
-					hrana = hrany.get(i+j);
-					//mameHranu = true;
-					System.out.println(hrana + " ");
-					return hrana;
-				}
-				//if(mameHranu) continue;
+				hrana = hrany.get(i);
+				return hrana;
 			}
 		}
-		
+
 		return null;
 	}
 }

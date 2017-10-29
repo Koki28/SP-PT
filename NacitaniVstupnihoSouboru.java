@@ -60,12 +60,12 @@ public class NacitaniVstupnihoSouboru {
 		    }
 			
 		//	graf.vypisVrcholy();
-		//	graf.vypisHrany();
+			graf.vypisHrany();
 			
-			for(int i = 1; i < pocet; i++) {
+		/*	for(int i = 1; i < pocet; i++) {
 				
 				graf.vypisSousedy(graf.getVrchol(i));
-			}
+			}*/
 			
 		} catch(FileNotFoundException e) {
 		

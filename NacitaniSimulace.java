@@ -48,16 +48,16 @@ public class NacitaniSimulace {
 				int data = Integer.parseInt(pole [3]);
 				
 				simulaceData.add(new Simulace(cas, zdroj, cil, data));
-				System.out.println("Cas: " + cas + " - zdroj: " + zdroj + " - cil: " + cil + " - data: " + data);	
+				//System.out.println("Cas: " + cas + " - zdroj: " + zdroj + " - cil: " + cil + " - data: " + data);	
 				
 				Vrchol zdrojV = graf.getVrchol(zdroj);
 				Vrchol cilV = graf.getVrchol(cil);
 				
-				cesta.najdiCestu(zdrojV, cilV);
+				//cesta.najdiCestu(zdrojV, cilV);
+				//cesta.vypisCestu();
 				
-				cesta.vypisCestu();
 		    }
-	
+			
 		} catch(FileNotFoundException e) {
 		
 			e.printStackTrace();
