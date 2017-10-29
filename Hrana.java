@@ -6,6 +6,7 @@ package sp;
  *
  * @author  Pavel Prùcha a Tomáš Slíva
  */
+
 public class Hrana {
 
 	/** Poèáteèní uzel hrany. */
@@ -19,6 +20,7 @@ public class Hrana {
 	
 	/** Chybovost hrany. */
 	double chybovost;
+	
 	
 	/**
      * Konstruktor vytváøející spojení mezi uzly poèítové sítì.
@@ -36,7 +38,7 @@ public class Hrana {
 		this.chybovost = chybovost;
 	}
 	
-   /**
+	/**
 	* Pøevede instanci na øetìzec obsahující poèáteèní uzel hrany, koncový uzel, její propustnost a chybovost.
 	* 
 	* @return Øetìzcová reprezentace dané hrany.
@@ -46,5 +48,15 @@ public class Hrana {
 		String propojeni = pocatecniUzel + " - " + koncovyUzel + " - " + propustnost + " - " + chybovost;
 		
 		return propojeni;
+	}
+	
+	public Vrchol getPocatecni() {
+		
+		return pocatecniUzel;
+	}
+	
+	public Vrchol getKoncovy() {
+		
+		return koncovyUzel;
 	}
 }

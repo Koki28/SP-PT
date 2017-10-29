@@ -13,5 +13,6 @@ public class HlavniTrida {
 		NacitaniVstupnihoSouboru.nactiVstup();
 		
 		NacitaniSimulace.nactiSimulaci();
+		
 	}
 }

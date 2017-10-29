@@ -7,25 +7,25 @@ import java.io.IOException;
 //import java.util.Scanner;
 
 /**
- * Tøída naèítající vstupní hodnoty poèítaèové sítì.
- * Naètené hodnoty se poté vloí do grafu.
+ * TÅ™Ã­da naÄÃ­tajÃ­cÃ­ vstupnÃ­ hodnoty poÄÃ­taÄovÃ© sÃ­tÄ›.
+ * NaÄtenÃ© hodnoty se potÃ© vloÅ¾Ã­ do grafu.
  *
- * @author  Pavel Prùcha a Tomáš Slíva
+ * @author  Pavel PrÅ¯cha a TomÃ¡Å¡ SlÃ­va
  */
 public class NacitaniVstupnihoSouboru {
 	
-	/** Graf poèítaèové sítì */
+	/** Graf poÄÃ­taÄovÃ© sÃ­tÄ› */
 	public static Graf graf;
 	
 	//public static Scanner sc = new Scanner(System.in);
 
 	/**
-	* Metoda naèítá po øádcích vstupní hodnoty ze
-	* souboru, které posléze vkládá do grafu.
+	* Metoda naÄÃ­tÃ¡ po Å™Ã¡dcÃ­ch vstupnÃ­ hodnoty ze
+	* souboru, kterÃ© poslÃ©ze vklÃ¡dÃ¡ do grafu.
 	*/
 	public static void nactiVstup() {
 		
-	//	System.out.println("Naspište název souboru vstupních dat: ");
+	//	System.out.println("NaspiÅ¡te nÃ¡zev souboru vstupnÃ­ch dat: ");
 	//	String vstup = sc.next();
 	//	try (BufferedReader br = new BufferedReader(new FileReader(vstup))) {
 			
@@ -70,7 +70,7 @@ public class NacitaniVstupnihoSouboru {
 		} catch(FileNotFoundException e) {
 		
 			e.printStackTrace();
-			System.err.println("Nepodaøilo se naèíst data ze souboru 'vstupTest.txt'.");
+			System.err.println("NepodaÅ™ilo se naÄÃ­st data ze souboru 'vstupTest.txt'.");
 		
 		} catch (IOException e) {
 		
@@ -79,9 +79,9 @@ public class NacitaniVstupnihoSouboru {
 	}
 	
    /**
-	* Vrací graf, tedy jeho seznam vrcholù a hran.
+	* VracÃ­ graf, tedy jeho seznam vrcholÅ¯ a hran.
 	* 
-	* @return  Vytvoøenı graf.
+	* @return  VytvoÅ™enÃ½ graf.
 	*/
 	public static Graf getGraf() {
 		

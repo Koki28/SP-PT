@@ -54,3 +54,4 @@ public class GenerovaniVstupnihoSouboru {
 		System.out.println("KONEEEEEC!!!!");
 	}
 }
+
