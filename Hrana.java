@@ -52,11 +52,16 @@ public class Hrana {
 	
 	public Vrchol getPocatecni() {
 		
-		return pocatecniUzel;
+		return this.pocatecniUzel;
 	}
 	
 	public Vrchol getKoncovy() {
 		
-		return koncovyUzel;
+		return this.koncovyUzel;
+	}
+	
+	public int getPropustnost() {
+		
+		return this.propustnost;
 	}
 }

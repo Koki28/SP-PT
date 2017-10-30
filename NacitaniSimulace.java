@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.LinkedList;
 //import java.util.Scanner;
 
 /**
@@ -36,9 +37,11 @@ public class NacitaniSimulace {
 						
 			Graf graf = NacitaniVstupnihoSouboru.getGraf();
 			
+			Cesta cesta = new Cesta();
+			
 			while ((radkaSimulace = br.readLine()) != null) {
 			
-				Cesta cesta = new Cesta();
+			//	Cesta cesta = new Cesta();
 				
 				String [] pole = radkaSimulace.split(" - ");
 				
@@ -56,7 +59,28 @@ public class NacitaniSimulace {
 				//cesta.najdiCestu(zdrojV, cilV);
 				//cesta.vypisCestu();
 				
+		/*		cesta.zpracujVrchol(zdrojV);
+				LinkedList <Vrchol> dijkstra = cesta.getCesta(cilV);
+				
+			//	assertNotNull(dijkstra);
+			//	assertTrue(dijkstra.size() > 0);
+				
+				for(Vrchol vrchol : dijkstra) {
+					
+					System.out.println(vrchol);
+				} */
 		    }
+			
+			cesta.zpracujVrchol(graf.getVrchol(1));
+			LinkedList <Vrchol> dijkstra = cesta.getCesta(graf.getVrchol(10));
+			
+		//	assertNotNull(dijkstra);
+		//	assertTrue(dijkstra.size() > 0);
+			
+			for(Vrchol vrchol : dijkstra) {
+				
+				System.out.println(vrchol);
+			}
 			
 		} catch(FileNotFoundException e) {
 		

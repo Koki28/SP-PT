@@ -99,7 +99,7 @@ public class Graf {
 		for (int i = 0; i < hrany.size(); i++) {
 
 			if ((hrany.get(i).getPocatecni().getId() == pocatecni.getId()) && (hrany.get(i).getKoncovy().getId() == koncovy.getId()) || 
-					(hrany.get(i).getPocatecni().getId() == koncovy.getId()) && (hrany.get(i).getKoncovy().getId() == pocatecni.getId())) {
+				(hrany.get(i).getPocatecni().getId() == koncovy.getId()) && (hrany.get(i).getKoncovy().getId() == pocatecni.getId())) {
 
 				hrana = hrany.get(i);
 				return hrana;
