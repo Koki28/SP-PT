@@ -52,13 +52,14 @@ public class Graf {
 	}
 
 	public void vypisSousedy(Vrchol vrchol) {
-
+		
 		System.out.println("Sousedi vrcholu " + vrchol + " jsou: ");
 
 		for (int i = 0; i < vrchol.sousedi.size(); i++) {
 
 			System.out.println("soused ---> "  + vrchol.sousedi.get(i) + "");
 		}
+		
 		System.out.println();
 	}
 

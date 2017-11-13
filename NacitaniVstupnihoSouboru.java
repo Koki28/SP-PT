@@ -1,35 +1,37 @@
+
+
 package sp;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-//import java.util.Scanner;
+import java.util.Scanner;
 
 /**
- * TÅ™Ã­da naÄÃ­tajÃ­cÃ­ vstupnÃ­ hodnoty poÄÃ­taÄovÃ© sÃ­tÄ›.
- * NaÄtenÃ© hodnoty se potÃ© vloÅ¾Ã­ do grafu.
+ * Tøída naèítající vstupní hodnoty poèítaèové sítì.
+ * Naètené hodnoty se poté vloí do grafu.
  *
- * @author  Pavel PrÅ¯cha a TomÃ¡Å¡ SlÃ­va
+ * @author  Pavel Prùcha a Tomáš Slíva
  */
 public class NacitaniVstupnihoSouboru {
 	
-	/** Graf poÄÃ­taÄovÃ© sÃ­tÄ› */
+	/** Graf poèítaèové sitì */
 	public static Graf graf;
 	
-	//public static Scanner sc = new Scanner(System.in);
+	 public static Scanner sc = new Scanner(System.in);
 
 	/**
-	* Metoda naÄÃ­tÃ¡ po Å™Ã¡dcÃ­ch vstupnÃ­ hodnoty ze
-	* souboru, kterÃ© poslÃ©ze vklÃ¡dÃ¡ do grafu.
+	* Metoda naèíjící po øádcích vstupní hodnoty ze
+	* souboru, které se posléze vkládají do grafu.
 	*/
 	public static void nactiVstup() {
 		
-	//	System.out.println("NaspiÅ¡te nÃ¡zev souboru vstupnÃ­ch dat: ");
-	//	String vstup = sc.next();
-	//	try (BufferedReader br = new BufferedReader(new FileReader(vstup))) {
+		System.out.println("Napište název souboru vstupnních dat: ");
+		String vstup = sc.next();
+		try (BufferedReader br = new BufferedReader(new FileReader(vstup))) {
 			
-		try (BufferedReader br = new BufferedReader(new FileReader("vstupTest.txt"))) {
+	//	try (BufferedReader br = new BufferedReader(new FileReader("vstupTest.txt"))) {
 		
 			String radkaVstupu;
 			int pocet = 0;
@@ -62,15 +64,15 @@ public class NacitaniVstupnihoSouboru {
 		//	graf.vypisVrcholy();
 			graf.vypisHrany();
 			
-		/*	for(int i = 1; i < pocet; i++) {
+			for(int i = 1; i < pocet; i++) {
 				
 				graf.vypisSousedy(graf.getVrchol(i));
-			}*/
+			}
 			
 		} catch(FileNotFoundException e) {
 		
 			e.printStackTrace();
-			System.err.println("NepodaÅ™ilo se naÄÃ­st data ze souboru 'vstupTest.txt'.");
+			System.err.println("Nepodaøilo se naèíst data ze souboru.");
 		
 		} catch (IOException e) {
 		
@@ -79,12 +81,13 @@ public class NacitaniVstupnihoSouboru {
 	}
 	
    /**
-	* VracÃ­ graf, tedy jeho seznam vrcholÅ¯ a hran.
+	* Vrací graf, tedy jeho seznam vrcholù a hran.
 	* 
-	* @return  VytvoÅ™enÃ½ graf.
+	* @return  Vytvoøenı graf.
 	*/
 	public static Graf getGraf() {
 		
 		return graf;
 	}
+	
 }

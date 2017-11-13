@@ -6,7 +6,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedList;
-//import java.util.Scanner;
+import java.util.Scanner;
 
 /**
  * Tøída naèítající hodnoty simulace prùtoku dat poèítaèovu sítí.
@@ -16,7 +16,7 @@ import java.util.LinkedList;
  */
 public class NacitaniSimulace {
 
-//	public static Scanner sc = new Scanner(System.in);
+	public static Scanner sc = new Scanner(System.in);
 	
 	/**
 	* Metoda naèítá po øádcích vstupní hodnoty ze souboru. 
@@ -27,11 +27,12 @@ public class NacitaniSimulace {
 		
 		ArrayList <Simulace> simulaceData = new ArrayList <Simulace>();
 		
-	//	System.out.println("Naspište název souboru simulace: ");
-	//	String simulace = sc.next();
-	//	try (BufferedReader br = new BufferedReader(new FileReader(simulace))) {
+		System.out.println();
+		System.out.println("Napište název souboru simulace: ");
+		String simulace = sc.next();
+		try (BufferedReader br = new BufferedReader(new FileReader(simulace))) {
 		
-		try(BufferedReader br = new BufferedReader(new FileReader("simulaceTest.txt"))) {
+	//	try(BufferedReader br = new BufferedReader(new FileReader("simulaceTest.txt"))) {
 			
 			String radkaSimulace;
 						
@@ -59,28 +60,29 @@ public class NacitaniSimulace {
 				//cesta.najdiCestu(zdrojV, cilV);
 				//cesta.vypisCestu();
 				
-		/*		cesta.zpracujVrchol(zdrojV);
+				System.out.println();
+
+				cesta.zpracujVrchol(zdrojV);
 				LinkedList <Vrchol> dijkstra = cesta.getCesta(cilV);
 				
-			//	assertNotNull(dijkstra);
-			//	assertTrue(dijkstra.size() > 0);
-				
+				if(dijkstra == null)
+					System.out.println("Cesta neexistuje.");
+				else
 				for(Vrchol vrchol : dijkstra) {
 					
 					System.out.println(vrchol);
-				} */
+				} 
 		    }
+			
+		/*	System.out.println();
 			
 			cesta.zpracujVrchol(graf.getVrchol(1));
 			LinkedList <Vrchol> dijkstra = cesta.getCesta(graf.getVrchol(10));
 			
-		//	assertNotNull(dijkstra);
-		//	assertTrue(dijkstra.size() > 0);
-			
 			for(Vrchol vrchol : dijkstra) {
 				
 				System.out.println(vrchol);
-			}
+			} */
 			
 		} catch(FileNotFoundException e) {
 		
