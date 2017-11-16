@@ -2,16 +2,30 @@ package sp;
 
 import java.util.Stack;
 
+/**
+ * Instance tøídy {@code StackPameti} pøedstavují zásobníky
+ * pamìti jednotlivıch uzlù sítì.
+ *
+ * @author  Pavel Prùcha a Tomáš Slíva
+ */
 public class StackPameti extends Stack {
 
 	private int soucet;
 	private final int MAX_PAMET = 100;
 	
+	/**
+	 * Konstruktor vytváøející zásobník pamìti uzlu sítì.
+	 */
 	public StackPameti() {
 
-		
+	//	this.soucet = 0;
 	}
 	
+	/**
+	 * Metoda pøidávající pamì do zásobníku, pokud není v jednom kroku odeslána.
+	 * 
+	 * @param pridanaPamet
+	 */
 	public void pridatPamet(int pridanaPamet) {
 		
 		if(kontrolaPameti(pridanaPamet)) {

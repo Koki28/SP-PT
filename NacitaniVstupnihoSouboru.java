@@ -19,7 +19,7 @@ public class NacitaniVstupnihoSouboru {
 	/** Graf poèítaèové sitì */
 	public static Graf graf;
 	
-	 public static Scanner sc = new Scanner(System.in);
+	public static Scanner sc = new Scanner(System.in);
 
 	/**
 	* Metoda naèíjící po øádcích vstupní hodnoty ze
@@ -29,16 +29,15 @@ public class NacitaniVstupnihoSouboru {
 		
 		System.out.println("Napište název souboru vstupnních dat: ");
 		String vstup = sc.next();
+		
 		try (BufferedReader br = new BufferedReader(new FileReader(vstup))) {
-			
-	//	try (BufferedReader br = new BufferedReader(new FileReader("vstupTest.txt"))) {
 		
 			String radkaVstupu;
 			int pocet = 0;
 			
 			graf = new Graf();
 			
-			while ((radkaVstupu = br.readLine()) != null) {
+			while((radkaVstupu = br.readLine()) != null) {
 				
 				pocet++;
 				

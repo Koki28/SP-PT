@@ -8,7 +8,7 @@ import java.util.LinkedList;
 
 public class Cesta {
 
-	public ArrayList <Vrchol> uzly;
+	ArrayList <Vrchol> uzly;
 	ArrayList <Hrana> propojeni;
 	HashSet <Vrchol> prozkoumane;
 	HashSet <Vrchol> neprozkoumane;
@@ -19,7 +19,6 @@ public class Cesta {
 //	private ArrayList<Vrchol> prochazenaCesta;
 	
 	private Graf graf = NacitaniVstupnihoSouboru.getGraf();
-//	private Hrana hrana;
 	
 	public Cesta() {
 		
@@ -47,41 +46,36 @@ public class Cesta {
 	
 	public void hledejNejkratsiCestu(Vrchol vrchol) {
         
-		// nemáme to?
 		ArrayList <Vrchol> sousedniVrcholy = getSousedi(vrchol);
         
-		// nìjak pøepsat
 		for(Vrchol cil : sousedniVrcholy) {
            
 			if(getNejkratsiVzdalenost(cil) > (getNejkratsiVzdalenost(vrchol) + getVzdalenost(vrchol, cil))) {
                 
-            	vzdalenost.put(cil, getNejkratsiVzdalenost(vrchol) + getVzdalenost(vrchol, cil));
+            	vzdalenost.put(cil,(int)(getNejkratsiVzdalenost(vrchol) + getVzdalenost(vrchol, cil)));
                 predchudce.put(cil, vrchol);
                 neprozkoumane.add(cil);
             }
         }
     }
 	
-	public int getVzdalenost(Vrchol vrchol, Vrchol cil) {
+	public double getVzdalenost(Vrchol vrchol, Vrchol cil) {
         
-		// nìjak pøepsat
 		for (Hrana hrana : propojeni) {
             
 			if (hrana.getPocatecni().equals(vrchol) && hrana.getKoncovy().equals(cil)) {
                 
-				return hrana.getPropustnost();
+				return hrana.getPropustnostDijkstra();
             }
         }
 		
         throw new RuntimeException("Chyba");
     }
 	
-	// nemáme už tuhle metodu svojí???
 	public ArrayList <Vrchol> getSousedi(Vrchol vrchol) {
 		
         ArrayList <Vrchol> sousedi = new ArrayList<Vrchol>();
         
-        // pøepsat jinak
         for (Hrana hrana : propojeni) {
         	
             if (hrana.getPocatecni().equals(vrchol) && !jeVyrizeny(hrana.getKoncovy())) {

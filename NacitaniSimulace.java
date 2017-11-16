@@ -74,7 +74,7 @@ public class NacitaniSimulace {
 				} 
 		    }
 			
-		/*	System.out.println();
+			System.out.println();
 			
 			cesta.zpracujVrchol(graf.getVrchol(1));
 			LinkedList <Vrchol> dijkstra = cesta.getCesta(graf.getVrchol(10));
@@ -82,7 +82,7 @@ public class NacitaniSimulace {
 			for(Vrchol vrchol : dijkstra) {
 				
 				System.out.println(vrchol);
-			} */
+			}  
 			
 		} catch(FileNotFoundException e) {
 		

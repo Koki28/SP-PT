@@ -15,7 +15,6 @@ public class Graf {
 
 	public void pridejVrchol(int id) {
 
-		boolean fail = false;
 		Vrchol novyVrchol = new Vrchol(id);
 
 		if(vrcholy.size() == 0) {
@@ -27,14 +26,11 @@ public class Graf {
 
 			if (vrcholy.get(i).getId() == id) {
 
-				fail = true;
+				return;
 			}
 		}
 
-		if(!fail) {
-
-			vrcholy.add(novyVrchol);	
-		}
+		vrcholy.add(novyVrchol);	
 	}
 
 	public void vypisVrcholy() {
@@ -79,10 +75,12 @@ public class Graf {
 	}
 
 	public void pridejHranu(Vrchol pocatecniUzel, Vrchol koncovyUzel, int propustnost, double chybovost) {
-
+		
 		Hrana novaHrana = new Hrana(pocatecniUzel, koncovyUzel, propustnost, chybovost);
-
+		Hrana zpetnaHrana = new Hrana(koncovyUzel, pocatecniUzel, propustnost, chybovost);
+		
 		hrany.add(novaHrana);
+		hrany.add(zpetnaHrana);
 	}
 
 	public void vypisHrany() {
