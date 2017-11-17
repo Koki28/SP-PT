@@ -82,7 +82,7 @@ public class NacitaniSimulace {
 			for(Vrchol vrchol : dijkstra) {
 				
 				System.out.println(vrchol);
-			}  
+			} 
 			
 		} catch(FileNotFoundException e) {
 		

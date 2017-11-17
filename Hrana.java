@@ -74,7 +74,7 @@ public class Hrana {
 	 * 
 	 * @return  Propustnost hrany pro Dijkstrùv algoritmus.
 	 */
-	public int getPropustnostDijkstra() {
+	public double getPropustnostDijkstra() {
 
 		return this.propustnost;
 	}

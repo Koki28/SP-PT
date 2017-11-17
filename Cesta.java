@@ -13,7 +13,7 @@ public class Cesta {
 	HashSet <Vrchol> prozkoumane;
 	HashSet <Vrchol> neprozkoumane;
 	HashMap <Vrchol, Vrchol> predchudce;
-	HashMap <Vrchol, Integer> vzdalenost;
+	HashMap <Vrchol, Double> vzdalenost;
 
 //	private ArrayList<Vrchol> nejkratsiCesta;
 //	private ArrayList<Vrchol> prochazenaCesta;
@@ -30,9 +30,9 @@ public class Cesta {
 		
 		 prozkoumane = new HashSet <Vrchol>();
 		 neprozkoumane = new HashSet <Vrchol>();
-		 vzdalenost = new HashMap <Vrchol, Integer>();
+		 vzdalenost = new HashMap <Vrchol, Double>();
 		 predchudce = new HashMap <Vrchol, Vrchol>();
-		 vzdalenost.put(vrchol, 0);
+		 vzdalenost.put(vrchol, 0.0);
 		 neprozkoumane.add(vrchol);
 		 
 		 while(neprozkoumane.size() > 0) {
@@ -52,7 +52,7 @@ public class Cesta {
            
 			if(getNejkratsiVzdalenost(cil) > (getNejkratsiVzdalenost(vrchol) + getVzdalenost(vrchol, cil))) {
                 
-            	vzdalenost.put(cil,(int)(getNejkratsiVzdalenost(vrchol) + getVzdalenost(vrchol, cil)));
+            	vzdalenost.put(cil, (getNejkratsiVzdalenost(vrchol) + getVzdalenost(vrchol, cil)));
                 predchudce.put(cil, vrchol);
                 neprozkoumane.add(cil);
             }
@@ -65,7 +65,7 @@ public class Cesta {
             
 			if (hrana.getPocatecni().equals(vrchol) && hrana.getKoncovy().equals(cil)) {
                 
-				return hrana.getPropustnostDijkstra();
+				return (1 / hrana.getPropustnostDijkstra());
             }
         }
 		
@@ -110,17 +110,17 @@ public class Cesta {
         return minimum;
     }
 	
-	private int getNejkratsiVzdalenost(Vrchol cil) {
+	public double getNejkratsiVzdalenost(Vrchol cil) {
 		
-        Integer hodnota = vzdalenost.get(cil);
+     //   double hodnota = vzdalenost.get(cil);
         
-        if(hodnota == null) {
+        if(vzdalenost.get(cil) == null) {
         	
-            return Integer.MAX_VALUE;
+            return Double.MAX_VALUE;
             
         } else {
         	
-            return hodnota;
+            return vzdalenost.get(cil);
         }
     }
 	
