@@ -28,14 +28,14 @@ public class StackPameti extends Stack {
 	 */
 	public void pridatPamet(int pridanaPamet) {
 		
-		if(kontrolaPameti(pridanaPamet)) {
+		//if(kontrolaPameti(pridanaPamet)) {
 			
 			soucet += pridanaPamet;
 
-		} else {
+		/*} else {
 			
 			posliZnovuData();
-		}
+		}*/
 	}
 	
 	public boolean kontrolaPameti(int pridanaPamet) {
@@ -51,5 +51,10 @@ public class StackPameti extends Stack {
 	public void posliZnovuData() {
 		
 		// ????
+	}
+
+	public void smazatData(int pozastavenaData) {
+		soucet -= pozastavenaData;
+		
 	}
 }
