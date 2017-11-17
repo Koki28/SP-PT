@@ -11,7 +11,7 @@ import java.util.Stack;
 public class StackPameti extends Stack {
 
 	private int soucet;
-	private final int MAX_PAMET = 100;
+	private final int MAX_PAMET = 800;
 	
 	/**
 	 * Konstruktor vytváøející zásobník pamìti uzlu sítì.

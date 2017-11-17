@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.Random;
 import java.util.Scanner;
 
 /**
@@ -16,7 +17,8 @@ import java.util.Scanner;
  */
 public class NacitaniSimulace {
 
-	public static Scanner sc = new Scanner(System.in);
+	private static Scanner sc = new Scanner(System.in);
+	private static Random r = new Random();
 
 	/**
 	 * Metoda naèítá po øádcích vstupní hodnoty ze souboru. 
@@ -80,22 +82,26 @@ public class NacitaniSimulace {
 				int krok = 0;
 				for(int i = 0; i < dijkstra.size()-1; i++) {
 					krok++;
-					
-					
-					
+								
 					Vrchol prvni = dijkstra.get(i); 
 					Vrchol druhy = dijkstra.get(i+1); 
 					System.out.println("\n--- krok " + krok + " ---");
 					System.out.println("Posílám data z vrcholu " +  prvni.getId() + " do vrcholu " + druhy.getId() + ": ");
 					
 					Hrana hrana = graf.getHrana(prvni, druhy);
-					int propustnostHrany = hrana.getPropustnost(); 
-					
+					int propustnostHrany = hrana.getPropustnost(); 	
+					double chybovostHrany = hrana.getChybovost();
+					double rand = r.nextDouble();
 					
 					System.out.println("propustnost " + prvni.getId() + "->" + druhy.getId() + ": " + propustnostHrany);
+					System.out.println("chybovost " + prvni.getId() + "->" + druhy.getId() + ": " + chybovostHrany);
 					
 					
 					if(propustnostHrany > data) {
+						/*if (((double)data / (double)propustnostHrany) > chybovostHrany) 
+							if (rand < 0.5);*/
+								//posli znova pulku dat
+						
 						System.out.println("Z vrcholu " + prvni.getId() + " do vrcholu " + druhy.getId() + " se poslala všechna data(" + data + ").");
 						//poslat data
 						
@@ -103,6 +109,9 @@ public class NacitaniSimulace {
 					
 					else{
 						int pozastavenaData = data - propustnostHrany;
+					 	/*rand = r.nextDouble();
+						if (rand < 0.5);*/
+							//posli znova pulku dat
 						System.out.println("Z vrcholu " + prvni.getId() + " do vrcholu " + druhy.getId() + " bylo posláno " + propustnostHrany + " dat.");
 						//poslat data
 						prvni.stack.pridatPamet(pozastavenaData);
@@ -113,32 +122,30 @@ public class NacitaniSimulace {
 						System.out.println("\n--- krok " + krok + " ---");
 						
 						if (propustnostHrany > pozastavenaData) {
+							/*if (((double)pozastavenaData / (double)propustnostHrany) > chybovostHrany) 
+							if (rand < 0.5);*/
+								//posli znova pulku dat
 							System.out.println("Z vrcholu " + prvni.getId() + " do vrcholu " + druhy.getId() + " se poslal zbytek dat(" + pozastavenaData + ").");
 							//poslat data
 							prvni.stack.smazatData(pozastavenaData);
 							System.out.println(pozastavenaData + " dat bylo smazáno ze stacku vrcholu " + prvni.getId() + ".");
-							//pozastavenaData = 0;
 							break;
 						}
-							System.out.println("Z vrcholu " + prvni.getId() + " do vrcholu " + druhy.getId() + " boly posláno " + propustnostHrany + " dat.");
-							//poslat data
-							prvni.stack.smazatData(propustnostHrany);
-							System.out.println(propustnostHrany + " dat bylo smazáno ze stacku vrcholu " + prvni.getId() + ".");
-							
-							pozastavenaData -= propustnostHrany;
-							
-							
+						
+						/*rand = r.nextDouble();
+						if (rand < 0.5);*/
+							//posli znova pulku dat
+						System.out.println("Z vrcholu " + prvni.getId() + " do vrcholu " + druhy.getId() + " boly posláno " + propustnostHrany + " dat.");
+						//poslat data
+						prvni.stack.smazatData(propustnostHrany);
+						System.out.println(propustnostHrany + " dat bylo smazáno ze stacku vrcholu " + prvni.getId() + ".");
+						pozastavenaData -= propustnostHrany;	
 						}
 						
 					}
 					
-					
 				}
 				System.out.println("<-------------------------------------->");
-				
-				
-				
-				
 				
 			}
 
@@ -151,20 +158,6 @@ public class NacitaniSimulace {
 
 				System.out.println(vrchol);
 			} */
-
-
-
-
-			 
-
-
-
-
-
-
-
-
-
 
 
 
