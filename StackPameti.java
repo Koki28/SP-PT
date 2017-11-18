@@ -26,16 +26,17 @@ public class StackPameti extends Stack {
 	 * 
 	 * @param pridanaPamet
 	 */
-	public void pridatPamet(int pridanaPamet) {
+	public boolean pridatPamet(int pridanaPamet) {
 		
-		//if(kontrolaPameti(pridanaPamet)) {
+		if(kontrolaPameti(pridanaPamet)) {
 			
 			soucet += pridanaPamet;
+			return true;
 
-		/*} else {
+		} else {
 			
-			posliZnovuData();
-		}*/
+			return false;
+		}
 	}
 	
 	public boolean kontrolaPameti(int pridanaPamet) {

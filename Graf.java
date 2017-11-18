@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Graf {
 
 	public ArrayList <Vrchol> vrcholy;
-	ArrayList <Hrana> hrany;
+	public ArrayList <Hrana> hrany;
 
 	public Graf() {
 

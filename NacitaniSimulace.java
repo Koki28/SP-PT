@@ -18,7 +18,9 @@ import java.util.Scanner;
 public class NacitaniSimulace {
 
 	private static Scanner sc = new Scanner(System.in);
-	private static Random r = new Random();
+	//private static Random r = new Random();
+	public static ArrayList<LinkedList> dijkstri = new ArrayList<LinkedList>();
+	private static int ztratovostReseni = 0;
 
 	/**
 	 * Metoda naèítá po øádcích vstupní hodnoty ze souboru. 
@@ -75,10 +77,17 @@ public class NacitaniSimulace {
 
 					System.out.println(vrchol);
 				} 
+				dijkstri.add(dijkstra);
 				
-				
-				
+				PrechodDat prechod = new PrechodDat();
+				System.out.println("\n<-------------------------------------->");
+				prechod.posliData(cas-1, data, dijkstra);
+				ztratovostReseni += prechod.vypisZtratovost();
 				System.out.println("<-------------------------------------->");
+				
+				
+				
+				/*System.out.println("<-------------------------------------->");
 				int krok = 0;
 				for(int i = 0; i < dijkstra.size()-1; i++) {
 					krok++;
@@ -98,9 +107,9 @@ public class NacitaniSimulace {
 					
 					
 					if(propustnostHrany > data) {
-						/*if (((double)data / (double)propustnostHrany) > chybovostHrany) 
-							if (rand < 0.5);*/
-								//posli znova pulku dat
+						//if (((double)data / (double)propustnostHrany) > chybovostHrany) 
+						//	if (rand < 0.5);
+						//		//posli znova pulku dat
 						
 						System.out.println("Z vrcholu " + prvni.getId() + " do vrcholu " + druhy.getId() + " se poslala všechna data(" + data + ").");
 						//poslat data
@@ -109,9 +118,9 @@ public class NacitaniSimulace {
 					
 					else{
 						int pozastavenaData = data - propustnostHrany;
-					 	/*rand = r.nextDouble();
-						if (rand < 0.5);*/
-							//posli znova pulku dat
+					 	//rand = r.nextDouble();
+						//if (rand < 0.5);
+						//	//posli znova pulku dat
 						System.out.println("Z vrcholu " + prvni.getId() + " do vrcholu " + druhy.getId() + " bylo posláno " + propustnostHrany + " dat.");
 						//poslat data
 						prvni.stack.pridatPamet(pozastavenaData);
@@ -122,9 +131,9 @@ public class NacitaniSimulace {
 						System.out.println("\n--- krok " + krok + " ---");
 						
 						if (propustnostHrany > pozastavenaData) {
-							/*if (((double)pozastavenaData / (double)propustnostHrany) > chybovostHrany) 
-							if (rand < 0.5);*/
-								//posli znova pulku dat
+							//if (((double)pozastavenaData / (double)propustnostHrany) > chybovostHrany) 
+							//if (rand < 0.5);
+							//	//posli znova pulku dat
 							System.out.println("Z vrcholu " + prvni.getId() + " do vrcholu " + druhy.getId() + " se poslal zbytek dat(" + pozastavenaData + ").");
 							//poslat data
 							prvni.stack.smazatData(pozastavenaData);
@@ -132,9 +141,9 @@ public class NacitaniSimulace {
 							break;
 						}
 						
-						/*rand = r.nextDouble();
-						if (rand < 0.5);*/
-							//posli znova pulku dat
+						//rand = r.nextDouble();
+						//if (rand < 0.5);
+						//	//posli znova pulku dat
 						System.out.println("Z vrcholu " + prvni.getId() + " do vrcholu " + druhy.getId() + " boly posláno " + propustnostHrany + " dat.");
 						//poslat data
 						prvni.stack.smazatData(propustnostHrany);
@@ -145,7 +154,7 @@ public class NacitaniSimulace {
 					}
 					
 				}
-				System.out.println("<-------------------------------------->");
+				System.out.println("<-------------------------------------->");*/
 				
 			}
 
@@ -159,7 +168,7 @@ public class NacitaniSimulace {
 				System.out.println(vrchol);
 			} */
 
-
+			System.out.println("\nZtrátovost øešení je " + ztratovostReseni);
 
 		} catch(FileNotFoundException e) {
 
@@ -171,4 +180,14 @@ public class NacitaniSimulace {
 			e.printStackTrace();
 		}
 	}
+
+/*	/**
+	* Vrací ArrayList naplnìný seznamem nejkratších cest.
+	* 
+	* @return  Vytvoøený ArrayList.
+	*/
+	/*public static ArrayList<LinkedList> getDijkstri() {
+		// TODO Auto-generated method stub
+		return dijkstri;
+	}*/
 }
