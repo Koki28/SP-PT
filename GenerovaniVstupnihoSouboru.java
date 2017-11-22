@@ -1,3 +1,5 @@
+// nebude použito
+
 package sp;
 
 import java.io.BufferedWriter;
@@ -19,7 +21,7 @@ public class GenerovaniVstupnihoSouboru {
 	*/
 	public static void generujVstupniSoubor() {
 
-		for(int i = 1; i < 10; i++) {
+		for(int i = 1; i < 500; i++) {
 
 			int j = i;
 
@@ -30,7 +32,7 @@ public class GenerovaniVstupnihoSouboru {
 				double chybovost = Math.round(r.nextDouble() * 100);
 				chybovost /= 100;
 
-				try (BufferedWriter bw = new BufferedWriter(new FileWriter("vstupTest.txt", true))) {
+				try (BufferedWriter bw = new BufferedWriter(new FileWriter("entry500.txt", true))) {
 
 					bw.write((i + 1) + " - " + j + " - "  + propustnost   + " - " + chybovost);
 					bw.newLine();
@@ -54,4 +56,3 @@ public class GenerovaniVstupnihoSouboru {
 		System.out.println("KONEEEEEC!!!!");
 	}
 }
-
