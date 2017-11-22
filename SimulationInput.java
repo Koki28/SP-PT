@@ -20,8 +20,18 @@ public class SimulationInput {
 
 	private static Scanner sc = new Scanner(System.in);
 
+	/** List of all requests. */
+	private static ArrayList <Simulation> requests = new ArrayList <Simulation>();
+	
 	/** Ammount of lost data. */
 	private static int dataLost = 0;
+	
+	/**
+	 * Empty constructor of class SimulationInput.
+	 */
+	public SimulationInput() {
+		
+	}
 
 	/**
 	 * This method is loading entry values of simulation
@@ -29,8 +39,6 @@ public class SimulationInput {
 	 * get the shortest path between selected nodes.
 	 */
 	public static void loadSimulation() {
-
-		ArrayList <Simulation> simulationData = new ArrayList <Simulation>();
 
 		System.out.println();
 		System.out.println("Please, write a name of simulation file: ");
@@ -53,7 +61,7 @@ public class SimulationInput {
 				int target = Integer.parseInt(array [2]);
 				int data = Integer.parseInt(array [3]);
 
-				simulationData.add(new Simulation(time, source, target, data));
+				requests.add(new Simulation(time, source, target, data));
 
 				Node sourceNode = graph.getNode(source);
 				Node targetNode = graph.getNode(target);
@@ -136,5 +144,15 @@ public class SimulationInput {
 
 			e.printStackTrace();
 		}
+	}
+	
+	/**
+	 * Returns list of all requests.
+	 * 
+	 * @return  List of all requests.
+	 */
+	public ArrayList <Simulation> getRequests() {
+		
+		return requests;
 	}
 }

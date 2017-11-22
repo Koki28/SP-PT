@@ -23,16 +23,16 @@ public class Path {
 	public ArrayList <Edge> edges;
 	
 	/** Set of explored nodes. */
-	HashSet <Node> explored;
+	private HashSet <Node> explored;
 	
 	/** Set of unexplored nodes. */
-	HashSet <Node> unexplored;
+	private HashSet <Node> unexplored;
 	
 	/** Map of ancestor nodes. */
-	HashMap <Node, Node> ancestor;
+	private HashMap <Node, Node> ancestor;
 	
 	/** Map of distance between nodes. */
-	HashMap <Node, Double> distance;
+	private HashMap <Node, Double> distance;
 	
 	/** Graph of computer web. */
 	private Graph graph = DataInput.getGraph();

@@ -16,13 +16,13 @@ public class SendingData {
 	private static Random r = new Random();
 
 	/** Graph of computer web. */
-	Graph graph = DataInput.getGraph();
+	 private Graph graph = DataInput.getGraph();
 
 	/** Ammount of lost data. */
 	private static int dataLost = 0;
 
 	/**
-	 * Constructor creating sending data packages between nodes.
+	 * Empty constructor of class SendingData.
 	 */
 	public SendingData() {
 		
