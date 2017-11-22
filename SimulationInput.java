@@ -35,7 +35,7 @@ public class SimulationInput {
 		System.out.println();
 		System.out.println("Please, write a name of simulation file: ");
 		String simulation = sc.next();
-		
+
 		try (BufferedReader br = new BufferedReader(new FileReader(simulation))) {
 
 			String row;
@@ -54,52 +54,58 @@ public class SimulationInput {
 				int data = Integer.parseInt(array [3]);
 
 				simulationData.add(new Simulation(time, source, target, data));
-				
+
 				Node sourceNode = graph.getNode(source);
 				Node targetNode = graph.getNode(target);
 
 				System.out.println();
 
 				path.examineNode(sourceNode);
-				
+
 				LinkedList <Node> dijkstra = path.getPath(targetNode);
 
 				if(dijkstra == null) {
-					
+
 					System.out.println("Path doesn´t exist.");
 					return;
 				}
 
 				try (BufferedWriter bw = new BufferedWriter(new FileWriter("simulation.txt", true))) {
-					
+
 					System.out.println("Path from node " + source + " to node " + target + ": ");
-					
+
 					bw.write("Path from node " + source + " to node " + target  + ": ");
 					bw.newLine();
-					
+
 					for(Node node : dijkstra) {
 
 						System.out.println(node);
-						
+
 						bw.write("->" + node);
 						bw.newLine();
 					} 
 
-					SendingData request = new SendingData();
-					
 					System.out.println("\n<-------------------------------------->");
-					
-					bw.write("<-------------------------------------->");
 					bw.newLine();
-					
-					request.sendData(time - 1, data, dijkstra);
-					dataLost += request.writeFaulting();
-					
-					System.out.println("<-------------------------------------->");
-					
 					bw.write("<-------------------------------------->");
-					bw.newLine();
 					bw.close();
+				}
+				catch (Exception e) {
+
+					System.err.println("Failed! Data aren´t recorded in the file.");
+				}
+				
+				SendingData request = new SendingData();
+				request.sendData(time - 1, data, dijkstra);
+				dataLost += request.writeFaulting();
+
+				try (BufferedWriter bw2 = new BufferedWriter(new FileWriter("simulation.txt", true))) {
+
+					System.out.println("<-------------------------------------->");
+
+					bw2.write("<-------------------------------------->");
+					bw2.newLine();
+					bw2.close();
 				}
 
 				catch (Exception e) {
@@ -109,7 +115,7 @@ public class SimulationInput {
 
 			}
 
-		/*	System.out.println();
+			/*	System.out.println();
 
 			path.examineNode(graph.getNode(1));
 			LinkedList <Node> dijkstra = path.getPath(graph.getNode(10));
