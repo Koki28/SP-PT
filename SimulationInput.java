@@ -105,7 +105,7 @@ public class SimulationInput {
 				
 				SendingData request = new SendingData();
 			//	request.sendData(time - 1, data, dijkstra);
-				SendingData.completeRequests();
+			//	SendingData.completeRequests();
 				dataLost += request.writeFaulting();
 
 			/*	try (BufferedWriter bw2 = new BufferedWriter(new FileWriter("simulation.txt", true))) {
@@ -123,7 +123,7 @@ public class SimulationInput {
 				} */
 
 			}
-
+		
 		/*	System.out.println();
 
 			path.examineNode(graph.getNode(1));
@@ -134,6 +134,8 @@ public class SimulationInput {
 				System.out.println(node);
 			} */
 
+			SendingData.completeRequests();
+			
 			System.out.println("\nFaulting this solution is " + dataLost);
 
 		} catch(FileNotFoundException e) {
@@ -144,7 +146,7 @@ public class SimulationInput {
 		} catch (IOException e) {
 
 			e.printStackTrace();
-		}
+		} 
 	}
 	
 	/**

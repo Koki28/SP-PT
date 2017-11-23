@@ -23,7 +23,7 @@ public class SendingData {
 	private static int dataLost = 0;
 
 	/** List of all requests. */
-	private static ArrayList<Simulation> requests = SimulationInput.getRequests();
+	private static ArrayList <Simulation> requests = SimulationInput.getRequests();
 	
 	/**
 	 * Empty constructor of class SendingData.
@@ -51,20 +51,21 @@ public class SendingData {
 				Node stackedNode = requests.get(i).getStackedNode();
 				int data = requests.get(i).getData();			
 					
-					path.examineNode(sourceNode);
+				path.examineNode(sourceNode);
 
-					LinkedList <Node> dijkstra = path.getPath(targetNode);
+				LinkedList <Node> dijkstra = path.getPath(targetNode);
 
-					if(dijkstra == null) {
+				if(dijkstra == null) {
 
-						System.out.println("Path doesn´t exist.");
-						return;
-					}
+					System.out.println("Path doesn´t exist.");
+					return;
+				}
 					
-					sendData(timer, data, dijkstra, sourceNode, targetNode, stackedNode);
-				//	requests.remove(i);
+				sendData(timer, data, dijkstra, sourceNode, targetNode, stackedNode);
+				requests.remove(i);
 				}
 			}
+			
 			timer++;
 		}
 	}
@@ -88,7 +89,7 @@ public class SendingData {
 		//Node one = dijkstra.get(i); 
 		//Node two = dijkstra.get(i + 1);
 		
-		try (BufferedWriter bw = new BufferedWriter(new FileWriter("simulation.txt", true))) {
+//		try (BufferedWriter bw = new BufferedWriter(new FileWriter("simulation.txt", true))) {
 
 			//for(int i = 0; i < dijkstra.size() - 1; i++) {
 				
@@ -99,12 +100,12 @@ public class SendingData {
 				System.out.println("\n--- second " + second + " ---");
 				System.out.println("Sending data about size <" + data + "> from node " +  one.getId() + " to node " + two.getId() + ": ");
 				
-				bw.newLine();
+	/*			bw.newLine();
 				bw.newLine();
 				bw.write("--- second " + second + " ---");
 				bw.newLine();
 				bw.write("Sending data about size <" + data + "> from node " +  one.getId() + " to node " + two.getId() + ": ");
-				bw.newLine();
+				bw.newLine(); */
 
 				Edge edge = graph.getEdge(one, two);
 				int transmittance = edge.getTransmittance(); 	
@@ -113,10 +114,10 @@ public class SendingData {
 				System.out.println("transmittance " + one.getId() + "->" + two.getId() + ": " + transmittance);
 				System.out.println("faulting " + one.getId() + "->" + two.getId() + ": " + faulting);
 				
-				bw.write("transmittance " + one.getId() + "->" + two.getId() + ": " + transmittance);
+	/*			bw.write("transmittance " + one.getId() + "->" + two.getId() + ": " + transmittance);
 				bw.newLine();
 				bw.write("faulting " + one.getId() + "->" + two.getId() + ": " + faulting);
-				bw.newLine();
+				bw.newLine();	*/
 
 				if(transmittance > data) {
 					
@@ -130,8 +131,8 @@ public class SendingData {
 							
 							System.out.println("- Overload! -  Half ammount of data must be sent again (" + loss + ").");
 							
-							bw.write("- Overload! -  Half ammount of data must be sent again (" + loss + ").");
-							bw.newLine();
+					//		bw.write("- Overload! -  Half ammount of data must be sent again (" + loss + ").");
+					//		bw.newLine();
 							
 							dataLost += loss;
 							//sendData(second, loss, dijkstra);
@@ -144,9 +145,9 @@ public class SendingData {
 
 							System.out.println("\n--- second " + second + " ---");
 							
-							bw.write("--- second " + second + " ---");
-							bw.newLine();
-							bw.newLine();
+					//		bw.write("--- second " + second + " ---");
+					//		bw.newLine();
+					//		bw.newLine();
 							
 							data = data - loss;
 						}
@@ -154,8 +155,8 @@ public class SendingData {
 
 					System.out.println("From node " + one.getId() + " to node " + two.getId() + " was sent " + data + " amount of data.");
 					
-					bw.write("From node " + one.getId() + " to node " + two.getId() + " was sent " + data + " ammount of data.");
-					bw.newLine();
+			//		bw.write("From node " + one.getId() + " to node " + two.getId() + " was sent " + data + " ammount of data.");
+			//		bw.newLine();
 					
 					requests.add(new Simulation(second + 1, two.getId(), last.getId(), data, null)); // upraveno
 					
@@ -178,8 +179,8 @@ public class SendingData {
 							
 							System.out.println("- Overload! -  Half ammount of data must be sent again (" + loss + ").");
 							
-							bw.write("- Overload! -  Half ammount of data must be sent again (" + loss + ").");
-							bw.newLine();
+						//	bw.write("- Overload! -  Half ammount of data must be sent again (" + loss + ").");
+						//	bw.newLine();
 							
 							dataLost += loss;
 						//	sendData(second, loss, dijkstra);
@@ -192,9 +193,9 @@ public class SendingData {
 
 							System.out.println("\n--- second " + second + " ---");
 							
-							bw.write("--- second " + second + " ---");
-							bw.newLine();
-							bw.newLine();
+						//	bw.write("--- second " + second + " ---");
+						//	bw.newLine();
+						//	bw.newLine();
 							
 							sent = transmittance - loss;
 						}
@@ -202,8 +203,8 @@ public class SendingData {
 					
 					System.out.println("From node " + one.getId() + " to node " + two.getId() + " was sent " + sent + " ammount of data.");
 					
-					bw.write("From node " + one.getId() + " to node " + two.getId() + " was sent " + sent + " ammount of data.");
-					bw.newLine();
+			//		bw.write("From node " + one.getId() + " to node " + two.getId() + " was sent " + sent + " ammount of data.");
+			//		bw.newLine();
 					
 					requests.add(new Simulation(second + 1, two.getId(), last.getId(), data, null)); // upraveno
 					
@@ -216,8 +217,8 @@ public class SendingData {
 						
 						System.out.println("Memory of node " + one.getId() + " overflowed! Data must be sent again (" +  remainingData + ").");
 						
-						bw.write("Memory of node " + one.getId() + " overflowed! Data must be sent again (" +  remainingData + ").");
-						bw.newLine();
+		//				bw.write("Memory of node " + one.getId() + " overflowed! Data must be sent again (" +  remainingData + ").");
+		//				bw.newLine();
 						
 						dataLost += remainingData;
 					//	sendData(second, remainingData, dijkstra);
@@ -234,8 +235,8 @@ public class SendingData {
 						
 						System.out.println(remainingData + " ammount of data was saved to memory stack of node " + one.getId() + ".");
 						
-						bw.write(remainingData + " ammount of data was saved to memory stack of node " + one.getId() + ".");
-						bw.newLine();
+			//			bw.write(remainingData + " ammount of data was saved to memory stack of node " + one.getId() + ".");
+			//			bw.newLine();
 						
 						requests.add(new Simulation(second + 1, first.getId(), last.getId(), remainingData, one)); //upraveno
 						
@@ -342,12 +343,12 @@ public class SendingData {
 				}
 	//		}
 			
-			bw.close();
+	//		bw.close();
 		
-		} catch (Exception e) {
+	/*	} catch (Exception e) {
 
 			System.err.println("Failed! Data aren´t recorded in the file.");
-		}
+		} */
 	}
 
 	public int writeFaulting() {
