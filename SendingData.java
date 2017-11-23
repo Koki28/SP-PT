@@ -2,6 +2,7 @@ package sp;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Random;
 
@@ -16,16 +17,56 @@ public class SendingData {
 	private static Random r = new Random();
 
 	/** Graph of computer web. */
-	 private Graph graph = DataInput.getGraph();
+	private static Graph graph = DataInput.getGraph();
 
 	/** Ammount of lost data. */
 	private static int dataLost = 0;
 
+	/** List of all requests. */
+	private static ArrayList<Simulation> requests = SimulationInput.getRequests();
+	
 	/**
 	 * Empty constructor of class SendingData.
 	 */
 	public SendingData() {
 		
+	}
+	
+	public static void completeRequests() {
+		
+		int timer = 0;
+		
+		Path path = new Path();
+		
+		while(!requests.isEmpty()) {
+			
+			for(int i = 0; i < requests.size(); i++) {
+				
+				int time = requests.get(i).getTime();
+				
+				if(time == timer) {
+				
+				Node sourceNode = graph.getNode(requests.get(i).getSource());
+				Node targetNode = graph.getNode(requests.get(i).getTarget());
+				Node stackedNode = requests.get(i).getStackedNode();
+				int data = requests.get(i).getData();			
+					
+					path.examineNode(sourceNode);
+
+					LinkedList <Node> dijkstra = path.getPath(targetNode);
+
+					if(dijkstra == null) {
+
+						System.out.println("Path doesn´t exist.");
+						return;
+					}
+					
+					sendData(timer, data, dijkstra, sourceNode, targetNode, stackedNode);
+				//	requests.remove(i);
+				}
+			}
+			timer++;
+		}
 	}
 	
 	/**
@@ -36,21 +77,24 @@ public class SendingData {
 	 * @param data  Data package.
 	 * @param dijkstra  Sorted list of all nodes to the target node.
 	 */
-	public void sendData(int time, int data, LinkedList <Node> dijkstra) {
+	public static void sendData(int time, int data, LinkedList <Node> dijkstra, Node one, Node two, Node stackedNode) {
 		
 		int loss = 0;
 		int sent = 0;
 		int second = time;
 		double rand;
+		Node first = dijkstra.get(0);
+		Node last = dijkstra.get(dijkstra.size() - 1);
+		//Node one = dijkstra.get(i); 
+		//Node two = dijkstra.get(i + 1);
 		
 		try (BufferedWriter bw = new BufferedWriter(new FileWriter("simulation.txt", true))) {
 
-			for(int i = 0; i < dijkstra.size() - 1; i++) {
+			//for(int i = 0; i < dijkstra.size() - 1; i++) {
 				
-				second++;
+//				second++;
 				
-				Node one = dijkstra.get(i); 
-				Node two = dijkstra.get(i + 1); 
+				 
 				
 				System.out.println("\n--- second " + second + " ---");
 				System.out.println("Sending data about size <" + data + "> from node " +  one.getId() + " to node " + two.getId() + ": ");
@@ -90,7 +134,13 @@ public class SendingData {
 							bw.newLine();
 							
 							dataLost += loss;
-							sendData(second, loss, dijkstra);
+							//sendData(second, loss, dijkstra);
+							requests.add(new Simulation(second + 1, first.getId(), last.getId(), loss, null)); //upraveno
+							
+							if(stackedNode != null) {
+								
+								stackedNode.stack.deleteData(loss);
+							}
 
 							System.out.println("\n--- second " + second + " ---");
 							
@@ -106,6 +156,13 @@ public class SendingData {
 					
 					bw.write("From node " + one.getId() + " to node " + two.getId() + " was sent " + data + " ammount of data.");
 					bw.newLine();
+					
+					requests.add(new Simulation(second + 1, two.getId(), last.getId(), data, null)); // upraveno
+					
+					if(stackedNode != null) {
+						
+						stackedNode.stack.deleteData(data);
+					}
 					
 				} else {
 					
@@ -125,7 +182,13 @@ public class SendingData {
 							bw.newLine();
 							
 							dataLost += loss;
-							sendData(second, loss, dijkstra);
+						//	sendData(second, loss, dijkstra);
+							requests.add(new Simulation(second + 1, first.getId(), last.getId(), loss, null)); //upraveno
+							
+							if(stackedNode != null) {
+								
+								stackedNode.stack.deleteData(loss);
+							}
 
 							System.out.println("\n--- second " + second + " ---");
 							
@@ -142,6 +205,13 @@ public class SendingData {
 					bw.write("From node " + one.getId() + " to node " + two.getId() + " was sent " + sent + " ammount of data.");
 					bw.newLine();
 					
+					requests.add(new Simulation(second + 1, two.getId(), last.getId(), data, null)); // upraveno
+					
+					if(stackedNode != null) {
+						
+						stackedNode.stack.deleteData(data);
+					}
+					
 					if (!one.stack.addMemory(remainingData)) {
 						
 						System.out.println("Memory of node " + one.getId() + " overflowed! Data must be sent again (" +  remainingData + ").");
@@ -150,8 +220,15 @@ public class SendingData {
 						bw.newLine();
 						
 						dataLost += remainingData;
-						sendData(second, remainingData, dijkstra);
-						break;
+					//	sendData(second, remainingData, dijkstra);
+						requests.add(new Simulation(second + 1, first.getId(), last.getId(), remainingData, null)); //upraveno
+						
+						if(stackedNode != null) {
+							
+							stackedNode.stack.deleteData(remainingData);
+						}
+						
+//						break;
 						
 					} else {
 						
@@ -159,9 +236,16 @@ public class SendingData {
 						
 						bw.write(remainingData + " ammount of data was saved to memory stack of node " + one.getId() + ".");
 						bw.newLine();
+						
+						requests.add(new Simulation(second + 1, first.getId(), last.getId(), remainingData, one)); //upraveno
+						
+						if(stackedNode != null) {
+							
+							stackedNode.stack.deleteData(remainingData);
+						}
 					}
 					
-					while(remainingData != 0) {
+			/*		while(remainingData != 0) {
 						
 						second++;
 						
@@ -254,9 +338,9 @@ public class SendingData {
 						
 						remainingData -= transmittance;
 						}
-					}
+					} */
 				}
-			}
+	//		}
 			
 			bw.close();
 		

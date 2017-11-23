@@ -50,7 +50,7 @@ public class SimulationInput {
 
 			Graph graph = DataInput.getGraph();
 
-			Path path = new Path();
+		//	Path path = new Path();
 
 			while ((row = br.readLine()) != null) {
 
@@ -61,14 +61,14 @@ public class SimulationInput {
 				int target = Integer.parseInt(array [2]);
 				int data = Integer.parseInt(array [3]);
 
-				requests.add(new Simulation(time, source, target, data));
+				requests.add(new Simulation(time, source, target, data, null));
 
 				Node sourceNode = graph.getNode(source);
 				Node targetNode = graph.getNode(target);
 
 				System.out.println();
 
-				path.examineNode(sourceNode);
+		/*		path.examineNode(sourceNode);
 
 				LinkedList <Node> dijkstra = path.getPath(targetNode);
 
@@ -76,24 +76,24 @@ public class SimulationInput {
 
 					System.out.println("Path doesn´t exist.");
 					return;
-				}
+				} */
 
-				try (BufferedWriter bw = new BufferedWriter(new FileWriter("simulation.txt", true))) {
+		/*		try (BufferedWriter bw = new BufferedWriter(new FileWriter("simulation.txt", true))) {
 
 					System.out.println("Path from node " + source + " to node " + target + ": ");
 
 					bw.write("Path from node " + source + " to node " + target  + ": ");
 					bw.newLine();
 
-					for(Node node : dijkstra) {
+				/*	for(Node node : dijkstra) {
 
 						System.out.println(node);
 
 						bw.write("->" + node);
 						bw.newLine();
-					} 
+					} */
 
-					System.out.println("\n<-------------------------------------->");
+		/*			System.out.println("\n<-------------------------------------->");
 					bw.newLine();
 					bw.write("<-------------------------------------->");
 					bw.close();
@@ -101,13 +101,14 @@ public class SimulationInput {
 				catch (Exception e) {
 
 					System.err.println("Failed! Data aren´t recorded in the file.");
-				}
+				} */
 				
 				SendingData request = new SendingData();
-				request.sendData(time - 1, data, dijkstra);
+			//	request.sendData(time - 1, data, dijkstra);
+				SendingData.completeRequests();
 				dataLost += request.writeFaulting();
 
-				try (BufferedWriter bw2 = new BufferedWriter(new FileWriter("simulation.txt", true))) {
+			/*	try (BufferedWriter bw2 = new BufferedWriter(new FileWriter("simulation.txt", true))) {
 
 					System.out.println("<-------------------------------------->");
 
@@ -119,11 +120,11 @@ public class SimulationInput {
 				catch (Exception e) {
 
 					System.err.println("Failed! Data aren´t recorded in the file.");
-				}
+				} */
 
 			}
 
-			/*	System.out.println();
+		/*	System.out.println();
 
 			path.examineNode(graph.getNode(1));
 			LinkedList <Node> dijkstra = path.getPath(graph.getNode(10));
@@ -151,7 +152,7 @@ public class SimulationInput {
 	 * 
 	 * @return  List of all requests.
 	 */
-	public ArrayList <Simulation> getRequests() {
+	public static ArrayList <Simulation> getRequests() {
 		
 		return requests;
 	}

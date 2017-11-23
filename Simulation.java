@@ -20,6 +20,9 @@ public class Simulation {
 	/** Data package. */
 	private int data;
 	
+	/** Node, where is data package saved. */
+	private Node stackedNode;
+	
 	/**
 	 * Constructor creating one request.
 	 * 
@@ -27,13 +30,15 @@ public class Simulation {
 	 * @param source  Source of request.
 	 * @param target  Target of request.
 	 * @param data  Data package.
+	 * @param stackedNode  Node, where is data package saved.
 	 */
-	public Simulation(int time, int source, int target, int data) {
+	public Simulation(int time, int source, int target, int data, Node stackedNode) {
 		
 		this.time = time;
 		this.source = source;
 		this.target = target;
 		this.data = data;
+		this.stackedNode = stackedNode;
 	}
 
 	/**
@@ -74,5 +79,15 @@ public class Simulation {
 	public int getData() {
 		
 		return this.data;
+	}
+	
+	/**
+	 * Returns node, where is data package saved.
+	 * 
+	 * @return  Node, where is data package saved.
+	 */
+	public Node getStackedNode() {
+		
+		return this.stackedNode;
 	}
 }
