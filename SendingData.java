@@ -31,21 +31,21 @@ public class SendingData {
 	public SendingData() {
 	}
 	
+	// koment
 	public static void completeRequests() {
 		
 		int timer = 0;
 		
 		Path path = new Path();
 		
-		
-		/*for(int i = 0; i < requests.size(); i++) {
-			System.out.println(requests.get(i).getTime());
-		}*/
-		
-		
 		while(!requests.isEmpty()) {
 			
 			for(int i = 0; i < requests.size(); i++) {
+								
+				if(requests.get(i) == null) { //
+					
+					System.out.println("Request " + i + " je null v èase " + timer);
+				}
 				
 				int time = requests.get(i).getTime();
 				
@@ -57,8 +57,7 @@ public class SendingData {
 				Node primeNode = requests.get(i).getPrimeNode();
 				int data = requests.get(i).getData();			
 				
-				
-				System.out.println("ROZJIZDIM: " + sourceNode + " -> " + targetNode);
+				System.out.println("ROZJIZDIM: " + sourceNode + " -> " + targetNode); // prepsat
 					
 				path.examineNode(sourceNode);
 
@@ -71,14 +70,24 @@ public class SendingData {
 				}
 					
 				sendData(timer, data, dijkstra, stackedNode, primeNode);
-				requests.remove(i);
+				requests.set(i, null);
 				}
 			}
 			
+			for(int i = 0; i < requests.size(); i++) {
+				
+				if(requests.get(i) == null) {
+					
+					requests.remove(i);
+					i--;
+				}
+			}
+			System.out.println("Poèet dalších requestù: " + requests.size()); //
 			timer++;
 		}
 	}
 	
+	//koment
 	/**
 	 * This method is sending data packages
 	 * through the shortest path to the target node.
@@ -86,6 +95,8 @@ public class SendingData {
 	 * @param time  Starting time of request.
 	 * @param data  Data package.
 	 * @param dijkstra  Sorted list of all nodes to the target node.
+	 * @param
+	 * @param
 	 */
 	public static void sendData(int time, int data, LinkedList <Node> dijkstra, Node stackedNode, Node prime) {
 		

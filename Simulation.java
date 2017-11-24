@@ -23,7 +23,7 @@ public class Simulation {
 	/** Node, where is data package saved. */
 	private Node stackedNode;
 	
-	/** Prime Node of default dijkstra. */
+	/** Prime node of default dijkstra. */
 	private Node primeNode;
 	
 	/**
@@ -34,6 +34,7 @@ public class Simulation {
 	 * @param target  Target of request.
 	 * @param data  Data package.
 	 * @param stackedNode  Node, where is data package saved.
+	 * @param primeNode  Prime node of default dijkstra.
 	 */
 	public Simulation(int time, int source, int target, int data, Node stackedNode, Node primeNode) {
 		
@@ -96,12 +97,12 @@ public class Simulation {
 	}
 
 	/**
-	 * Prime Node of default dijkstra.
+	 * Returns prime node of default dijkstra.
 	 * 
-	 * @return Prime Node of default dijkstra
+	 * @return  Prime node of default dijkstra.
 	 */
 	public Node getPrimeNode() {
+		
 		return primeNode;
 	}
-
 }

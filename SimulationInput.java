@@ -123,7 +123,7 @@ public class SimulationInput {
 				} */
 
 			}
-		
+			
 		/*	System.out.println();
 
 			path.examineNode(graph.getNode(1));
