@@ -24,7 +24,6 @@ public class DataInput {
 	 * Empty constructor of class DataInput.
 	 */
 	public DataInput() {
-		
 	}
 	
 	/**

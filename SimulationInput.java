@@ -48,7 +48,7 @@ public class SimulationInput {
 
 			String row;
 
-			Graph graph = DataInput.getGraph();
+		//	Graph graph = DataInput.getGraph();
 
 		//	Path path = new Path();
 
@@ -61,10 +61,10 @@ public class SimulationInput {
 				int target = Integer.parseInt(array [2]);
 				int data = Integer.parseInt(array [3]);
 
-				requests.add(new Simulation(time, source, target, data, null));
+				requests.add(new Simulation(time, source, target, data, null, null));
 
-				Node sourceNode = graph.getNode(source);
-				Node targetNode = graph.getNode(target);
+			//	Node sourceNode = graph.getNode(source);
+			//	Node targetNode = graph.getNode(target);
 
 				System.out.println();
 

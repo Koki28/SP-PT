@@ -29,7 +29,6 @@ public class SendingData {
 	 * Empty constructor of class SendingData.
 	 */
 	public SendingData() {
-		
 	}
 	
 	public static void completeRequests() {
@@ -37,6 +36,12 @@ public class SendingData {
 		int timer = 0;
 		
 		Path path = new Path();
+		
+		
+		/*for(int i = 0; i < requests.size(); i++) {
+			System.out.println(requests.get(i).getTime());
+		}*/
+		
 		
 		while(!requests.isEmpty()) {
 			
@@ -49,7 +54,11 @@ public class SendingData {
 				Node sourceNode = graph.getNode(requests.get(i).getSource());
 				Node targetNode = graph.getNode(requests.get(i).getTarget());
 				Node stackedNode = requests.get(i).getStackedNode();
+				Node primeNode = requests.get(i).getPrimeNode();
 				int data = requests.get(i).getData();			
+				
+				
+				System.out.println("ROZJIZDIM: " + sourceNode + " -> " + targetNode);
 					
 				path.examineNode(sourceNode);
 
@@ -61,7 +70,7 @@ public class SendingData {
 					return;
 				}
 					
-				sendData(timer, data, dijkstra, sourceNode, targetNode, stackedNode);
+				sendData(timer, data, dijkstra, stackedNode, primeNode);
 				requests.remove(i);
 				}
 			}
@@ -78,16 +87,22 @@ public class SendingData {
 	 * @param data  Data package.
 	 * @param dijkstra  Sorted list of all nodes to the target node.
 	 */
-	public static void sendData(int time, int data, LinkedList <Node> dijkstra, Node one, Node two, Node stackedNode) {
+	public static void sendData(int time, int data, LinkedList <Node> dijkstra, Node stackedNode, Node prime) {
 		
 		int loss = 0;
 		int sent = 0;
 		int second = time;
 		double rand;
-		Node first = dijkstra.get(0);
+		
+		Node first;
+		
+		if (prime == null) first = dijkstra.get(0);
+		
+		else first = prime;
+
 		Node last = dijkstra.get(dijkstra.size() - 1);
-		//Node one = dijkstra.get(i); 
-		//Node two = dijkstra.get(i + 1);
+		Node one = dijkstra.get(0); 
+		Node two = dijkstra.get(1);
 		
 //		try (BufferedWriter bw = new BufferedWriter(new FileWriter("simulation.txt", true))) {
 
@@ -136,7 +151,7 @@ public class SendingData {
 							
 							dataLost += loss;
 							//sendData(second, loss, dijkstra);
-							requests.add(new Simulation(second + 1, first.getId(), last.getId(), loss, null)); //upraveno
+							requests.add(new Simulation(second + 1, first.getId(), last.getId(), loss, null, first)); //upraveno
 							
 							if(stackedNode != null) {
 								
@@ -158,7 +173,9 @@ public class SendingData {
 			//		bw.write("From node " + one.getId() + " to node " + two.getId() + " was sent " + data + " ammount of data.");
 			//		bw.newLine();
 					
-					requests.add(new Simulation(second + 1, two.getId(), last.getId(), data, null)); // upraveno
+					if (two.getId() != last.getId())
+					requests.add(new Simulation(second + 1, two.getId(), last.getId(), data, null, first)); // upraveno
+					else System.out.println("---Data dorazila do cílovéhu uzlu (cesta " + first.getId() + "->" + last.getId() + ").---");
 					
 					if(stackedNode != null) {
 						
@@ -184,7 +201,7 @@ public class SendingData {
 							
 							dataLost += loss;
 						//	sendData(second, loss, dijkstra);
-							requests.add(new Simulation(second + 1, first.getId(), last.getId(), loss, null)); //upraveno
+							requests.add(new Simulation(second + 1, first.getId(), last.getId(), loss, null, first)); //upraveno
 							
 							if(stackedNode != null) {
 								
@@ -205,8 +222,10 @@ public class SendingData {
 					
 			//		bw.write("From node " + one.getId() + " to node " + two.getId() + " was sent " + sent + " ammount of data.");
 			//		bw.newLine();
-					
-					requests.add(new Simulation(second + 1, two.getId(), last.getId(), data, null)); // upraveno
+					System.out.println(second + " - second, " + two + " - two, " + last + " - last, " + data + " - data, " + null + " - null, " + first + " - first.");
+					if (two.getId() != last.getId())
+					requests.add(new Simulation(second + 1, two.getId(), last.getId(), data, null, first)); // upraveno
+					else System.out.println("---Data dorazila do cílovéhu uzlu (cesta " + first.getId() + "->" + last.getId() + ").---");
 					
 					if(stackedNode != null) {
 						
@@ -222,7 +241,7 @@ public class SendingData {
 						
 						dataLost += remainingData;
 					//	sendData(second, remainingData, dijkstra);
-						requests.add(new Simulation(second + 1, first.getId(), last.getId(), remainingData, null)); //upraveno
+						requests.add(new Simulation(second + 1, first.getId(), last.getId(), remainingData, null, first)); //upraveno
 						
 						if(stackedNode != null) {
 							
@@ -237,8 +256,7 @@ public class SendingData {
 						
 			//			bw.write(remainingData + " ammount of data was saved to memory stack of node " + one.getId() + ".");
 			//			bw.newLine();
-						
-						requests.add(new Simulation(second + 1, first.getId(), last.getId(), remainingData, one)); //upraveno
+						requests.add(new Simulation(second + 1, one.getId(), last.getId(), remainingData, one, first)); //upraveno 
 						
 						if(stackedNode != null) {
 							
