@@ -116,12 +116,6 @@ public class SendingData {
 		Node two = dijkstra.get(1);
 		
 //		try (BufferedWriter bw = new BufferedWriter(new FileWriter("simulation.txt", true))) {
-
-			//for(int i = 0; i < dijkstra.size() - 1; i++) {
-				
-//				second++;
-				
-				 
 				
 				System.out.println("\n--- second " + second + " ---");
 				System.out.println("Sending data about size <" + data + "> from node " +  one.getId() + " to node " + two.getId() + ": ");
@@ -161,7 +155,6 @@ public class SendingData {
 					//		bw.newLine();
 							
 							dataLost += loss;
-							//sendData(second, loss, dijkstra);
 							requests.add(new Simulation(second + 1, first.getId(), last.getId(), loss, null, first)); //upraveno
 							
 							if(stackedNode != null) {
@@ -211,7 +204,6 @@ public class SendingData {
 						//	bw.newLine();
 							
 							dataLost += loss;
-						//	sendData(second, loss, dijkstra);
 							requests.add(new Simulation(second + 1, first.getId(), last.getId(), loss, null, first)); //upraveno
 							
 							if(stackedNode != null) {
@@ -233,7 +225,6 @@ public class SendingData {
 					
 			//		bw.write("From node " + one.getId() + " to node " + two.getId() + " was sent " + sent + " ammount of data.");
 			//		bw.newLine();
-					System.out.println(second + " - second, " + two + " - two, " + last + " - last, " + data + " - data, " + null + " - null, " + first + " - first.");
 					if (two.getId() != last.getId())
 					requests.add(new Simulation(second + 1, two.getId(), last.getId(), data, null, first)); // upraveno
 					else System.out.println("---Data dorazila do cílovéhu uzlu (cesta " + first.getId() + "->" + last.getId() + ").---");
@@ -251,16 +242,13 @@ public class SendingData {
 		//				bw.newLine();
 						
 						dataLost += remainingData;
-					//	sendData(second, remainingData, dijkstra);
 						requests.add(new Simulation(second + 1, first.getId(), last.getId(), remainingData, null, first)); //upraveno
 						
 						if(stackedNode != null) {
 							
 							stackedNode.stack.deleteData(remainingData);
 						}
-						
-//						break;
-						
+												
 					} else {
 						
 						System.out.println(remainingData + " ammount of data was saved to memory stack of node " + one.getId() + ".");
@@ -380,14 +368,14 @@ public class SendingData {
 		} */
 	}
 
-	public int writeFaulting() {
+	public static int writeFaulting() {
 		
 		try (BufferedWriter bw = new BufferedWriter(new FileWriter("simulation.txt", true))) {
 			
-			System.out.println("\nFaulting is " + dataLost);
+			System.out.println("\nFaulting this solution is " + dataLost);
 			
 			bw.newLine();
-			bw.write("Faluting is " + dataLost);
+			bw.write("Faulting this solution is " + dataLost);
 			bw.newLine();
 			bw.newLine();
 			bw.close();

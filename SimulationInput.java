@@ -103,10 +103,10 @@ public class SimulationInput {
 					System.err.println("Failed! Data aren´t recorded in the file.");
 				} */
 				
-				SendingData request = new SendingData();
+				
 			//	request.sendData(time - 1, data, dijkstra);
 			//	SendingData.completeRequests();
-				dataLost += request.writeFaulting();
+				
 
 			/*	try (BufferedWriter bw2 = new BufferedWriter(new FileWriter("simulation.txt", true))) {
 
@@ -133,11 +133,10 @@ public class SimulationInput {
 
 				System.out.println(node);
 			} */
-
-			SendingData.completeRequests();
 			
-			System.out.println("\nFaulting this solution is " + dataLost);
-
+			SendingData.completeRequests();
+			SendingData.writeFaulting();
+			
 		} catch(FileNotFoundException e) {
 
 			e.printStackTrace();
