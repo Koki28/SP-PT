@@ -13,7 +13,6 @@ import java.util.LinkedList;
  * @author  Pavel Prùcha and Tomáš Slíva
  */
 
-// koeficient
 public class Path {
 
 	/** Copy of the list of all nodes. */
