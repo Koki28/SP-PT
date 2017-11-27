@@ -19,7 +19,7 @@ public class DataInput {
 	
 	/** Scanner. */
 	public static Scanner sc = new Scanner(System.in);
-
+	
 	/**
 	 * Empty constructor of class DataInput.
 	 */

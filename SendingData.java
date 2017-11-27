@@ -310,9 +310,16 @@ public class SendingData {
 		try (BufferedWriter bw = new BufferedWriter(new FileWriter("simulation.txt", true))) {
 			
 			System.out.println("\nFaulting this solution is " + dataLost + ".");
+			System.out.println("\nSimulation finished !!!");
+			System.out.println();
 			
 			bw.newLine();
 			bw.write("Faulting this solution is " + dataLost + ".");
+			bw.newLine();
+			bw.newLine();
+			bw.write("Simulation finished !!!");
+			bw.newLine();
+			bw.newLine();
 			bw.close();
 		
 		} catch (Exception e) {
@@ -321,5 +328,9 @@ public class SendingData {
 		}
 		
 		return dataLost;
+	}
+
+	public static void watchNode() {
+		
 	}
 }
