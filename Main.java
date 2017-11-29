@@ -10,8 +10,8 @@ public class Main {
 
 	public static void main(String[] args) {
 
-		DataInput.loadEntryValues();
+		DataInput.loadEntryValues(null, false, null);
 		
-		SimulationInput.loadSimulation();
+		SimulationInput.loadSimulation(null, false, null);
 	}
 }

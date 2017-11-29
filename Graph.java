@@ -2,6 +2,8 @@ package sp;
 
 import java.util.ArrayList;
 
+import javafx.scene.control.TextArea;
+
 /**
  * Instance of class {@code Graph} representing graph of 
  * computer web. It consists of all nodes and edges.
@@ -79,17 +81,35 @@ public class Graph {
 	 * This method is printing all neighbours of selected node.
 	 * 
 	 * @param node  Selected node.
+	 * @param x  If false print into console, else into GUI.
+	 * @param textArea  TextArea of GUI.
 	 */
-	public void printNeighbours(Node node) {
+	public void printNeighbours(Node node, boolean x, TextArea textArea) {
 		
-		System.out.println("Neighbours of node " + node + " are: ");
+		if(!x) {
+			
+			System.out.println("Neighbours of node " + node + " are: ");
 
-		for (int i = 0; i < node.neighbours.size(); i++) {
+			for (int i = 0; i < node.neighbours.size(); i++) {
 
-			System.out.println("neighbour ---> " + node.neighbours.get(i) + "");
+				System.out.println("neighbour ---> " + node.neighbours.get(i) + "");
+			}
+			
+			System.out.println();
+		
+		} else {
+			
+			String text = "";
+			
+			text = text + ("Neighbours of node " + node + " are: \n");
+			
+			for (int i = 0; i < node.neighbours.size(); i++) {
+
+				text = text + ("neighbour ---> " + node.neighbours.get(i) + "\n");
+			}
+			
+			textArea.appendText(text + "\n");
 		}
-		
-		System.out.println();
 	}
 
 	/**
@@ -133,16 +153,34 @@ public class Graph {
 
 	/**
 	 * This method is printing all edges of the graph.
+	 * 
+	 * @param x  If false print into console, else into GUI.
+	 * @param textArea  TextArea of GUI.
 	 */
-	public void printEdges() {
+	public void printEdges(boolean x, TextArea textArea) {
 
-		for (int i = 0; i < edges.size(); i ++) {
+		if(!x) {
+			
+			for (int i = 0; i < edges.size(); i ++) {
 
-			System.out.println(edges.get(i) + " ");
-			i++;
-		}
+				System.out.println(edges.get(i) + " ");
+				i++;
+			}
+			
+			System.out.println();
+			
+		} else {
+			
+			String text = "";
+			
+			for (int i = 0; i < edges.size(); i ++) {
+
+				text = text + (edges.get(i) + "\n");
+				i++;
+			}
 		
-		System.out.println();
+			textArea.appendText(text + "\n");
+		}
 	}
 
 	/**

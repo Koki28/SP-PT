@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Random;
 
+import javafx.scene.control.TextArea;
+
 /**
  * Instance of class {@code SendingData} representing
  * sending data packages between selected nodes.
@@ -35,8 +37,11 @@ public class SendingData {
 	/**
 	 * This method is loading all requests and simulate
 	 * completing all requests according to time.
+	 * 
+	 * @param x  If false print into console, else into GUI.
+	 * @param textArea  TextArea of GUI.
 	 */
-	public static void completeRequests() {
+	public static void completeRequests(boolean x, TextArea textArea) {
 		
 		int timer = 0; 
 		
@@ -50,38 +55,57 @@ public class SendingData {
 				
 				if(time == timer) {
 				
-				Node sourceNode = graph.getNode(requests.get(i).getSource());
-				Node targetNode = graph.getNode(requests.get(i).getTarget());
-				Node stackedNode = requests.get(i).getStackedNode();
-				Node primeNode = requests.get(i).getPrimeNode();
-				int data = requests.get(i).getData();			
+					Node sourceNode = graph.getNode(requests.get(i).getSource());
+					Node targetNode = graph.getNode(requests.get(i).getTarget());
+					Node stackedNode = requests.get(i).getStackedNode();
+					Node primeNode = requests.get(i).getPrimeNode();
+					int data = requests.get(i).getData();			
 				
-				System.out.println("\nMovement of data packages: " + sourceNode + " -> " + targetNode);
+					if(!x) {
+					
+						System.out.println("\nMovement of data packages: " + sourceNode + " -> " + targetNode);
+					
+					} else {
+					
+						textArea.appendText("\n\nMovement of data packages: " + sourceNode + " -> " + targetNode);
+					}
 				
-				try (BufferedWriter bw = new BufferedWriter(new FileWriter("simulation.txt", true))) {
+					try (BufferedWriter bw = new BufferedWriter(new FileWriter("simulation.txt", true))) {
 					
-					bw.newLine();
-					bw.write("Movement of data packages: " + sourceNode + " -> " + targetNode);
-					bw.newLine();
-					bw.close();
+						bw.newLine();
+						bw.write("Movement of data packages: " + sourceNode + " -> " + targetNode);
+						bw.newLine();
 					
-				} catch (IOException e) {
-					
-					e.printStackTrace();
-				}
-					
-				path.examineNode(sourceNode);
+						path.examineNode(sourceNode);
 
-				LinkedList <Node> dijkstra = path.getPath(targetNode);
+						LinkedList <Node> dijkstra = path.getPath(targetNode);
 
-				if(dijkstra == null) {
+						if(dijkstra == null) {
 
-					System.out.println("Path doesn´t exist.");
-					return;
-				}
+							if(!x) {
+						
+								System.out.println("Path doesn´t exist.");
 					
-				sendData(timer, data, dijkstra, stackedNode, primeNode);
-				requests.set(i, null);
+							} else {
+						
+								textArea.appendText("Path doesn´t exist.");
+							}
+					
+							bw.newLine();
+							bw.write("Path doesn´t exist.");
+							
+							return;
+						}
+					
+						sendData(timer, data, dijkstra, stackedNode, primeNode, x, textArea);
+						requests.set(i, null);
+						
+						bw.close();
+						
+					} catch (IOException e) {
+						
+						e.printStackTrace();
+					}
 				}
 			}
 			
@@ -107,8 +131,10 @@ public class SendingData {
 	 * @param dijkstra  Sorted list of all nodes to the target node.
 	 * @param stackedNode  Node, where is data package saved.
 	 * @param prime  Prime node of default dijkstra.
+	 * @param x  If false print into console, else into GUI.
+	 * @param textArea  TextArea of GUI.
 	 */
-	public static void sendData(int time, int data, LinkedList <Node> dijkstra, Node stackedNode, Node prime) {
+	public static void sendData(int time, int data, LinkedList <Node> dijkstra, Node stackedNode, Node prime, boolean x, TextArea textArea) {
 		
 		int loss = 0;
 		int sent = 0;
@@ -132,186 +158,294 @@ public class SendingData {
 		
 		try (BufferedWriter bw = new BufferedWriter(new FileWriter("simulation.txt", true))) {
 				
+			if(!x) {
+				
 				System.out.println("\n--- second " + second + " ---");
 				System.out.println("Sending data about size <" + data + "> from node " +  one.getId() + " to node " + two.getId() + ": ");
+			
+			} else {
 				
-				bw.newLine();
-				bw.write("--- second " + second + " ---");
-				bw.newLine();
-				bw.write("Sending data about size <" + data + "> from node " +  one.getId() + " to node " + two.getId() + ": ");
-				bw.newLine();
+				textArea.appendText("\n--- second " + second + " ---\n");
+				textArea.appendText("Sending data about size <" + data + "> from node " +  one.getId() + " to node " + two.getId() + ": \n");
+			}
+				
+			bw.newLine();
+			bw.write("--- second " + second + " ---");
+			bw.newLine();
+			bw.write("Sending data about size <" + data + "> from node " +  one.getId() + " to node " + two.getId() + ": ");
+			bw.newLine();
 
-				Edge edge = graph.getEdge(one, two);
-				int transmittance = edge.getTransmittance(); 	
-				double faulting = edge.getFaulting();
+			Edge edge = graph.getEdge(one, two);
+			int transmittance = edge.getTransmittance(); 	
+			double faulting = edge.getFaulting();
 
+			if(!x) {
+				
 				System.out.println("transmittance " + one.getId() + " -> " + two.getId() + ": " + transmittance);
 				System.out.println("faulting " + one.getId() + " -> " + two.getId() + ": " + faulting);
+			
+			} else {
 				
-				bw.write("transmittance " + one.getId() + " -> " + two.getId() + ": " + transmittance);
-				bw.newLine();
-				bw.write("faulting " + one.getId() + " -> " + two.getId() + ": " + faulting);
-				bw.newLine();
+				textArea.appendText("transmittance " + one.getId() + " -> " + two.getId() + ": " + transmittance + "\n");
+				textArea.appendText("faulting " + one.getId() + " -> " + two.getId() + ": " + faulting + "\n");
+			}
+				
+			bw.write("transmittance " + one.getId() + " -> " + two.getId() + ": " + transmittance);
+			bw.newLine();
+			bw.write("faulting " + one.getId() + " -> " + two.getId() + ": " + faulting);
+			bw.newLine();
 
-				if(transmittance > data) {
+			if(transmittance > data) {
 					
-					rand = r.nextDouble();
+				rand = r.nextDouble();
 					
-					if(((double) data / (double) transmittance) > faulting) {
+				if(((double) data / (double) transmittance) > faulting) {
 						
-						if (rand < 0.5) {
+					if (rand < 0.5) {
 							
-							loss = (int) Math.ceil(data / 2.0);
+						loss = (int) Math.ceil(data / 2.0);
+						
+						if(!x) {
 							
 							System.out.println("- Overload! -  Half ammount of data must be sent again (" + loss + ").");
-							
-							bw.write("- Overload! -  Half ammount of data must be sent again (" + loss + ").");
-							bw.newLine();
-							bw.newLine();
-							
-							dataLost += loss;
-							requests.add(new Simulation(second + 1, first.getId(), last.getId(), loss, null, first));
-							
-							if(stackedNode != null) {
-								
-								stackedNode.stack.deleteData(loss);
-							}
 
-							System.out.println("\n--- second " + second + " ---");
+						} else {
 							
-							bw.write("--- second " + second + " ---");
-							bw.newLine();
-							
-							data = data - loss;
+							textArea.appendText("- Overload! -  Half ammount of data must be sent again (" + loss + ").\n");
 						}
-					}
-
-					System.out.println("From node " + one.getId() + " to node " + two.getId() + " was sent " + data + " amount of data.");
-					
-					bw.write("From node " + one.getId() + " to node " + two.getId() + " was sent " + data + " ammount of data.");
-					bw.newLine();
-					
-					if (two.getId() != last.getId()) {
-					
-						requests.add(new Simulation(second + 1, two.getId(), last.getId(), data, null, first));
-					
-					} else {
-						
-						System.out.println("--- Data successfully sent to the target node (path " + first.getId() + " -> " + last.getId() + "). ---");
-						
-						bw.write("--- Data successfully sent to the target node (path " + first.getId() + " -> " + last.getId() + "). ---");
+							
+						bw.write("- Overload! -  Half ammount of data must be sent again (" + loss + ").");
 						bw.newLine();
-					}
-					
-					if(stackedNode != null) {
+						bw.newLine();
+							
+						dataLost += loss;
+						requests.add(new Simulation(second + 1, first.getId(), last.getId(), loss, null, first));
+							
+						if(stackedNode != null) {
+								
+							stackedNode.stack.deleteData(loss);
+						}
+
+						if(!x) {
+							
+							System.out.println("\n--- second " + second + " ---");
+
+						} else {
+							
+							textArea.appendText("\n--- second " + second + " ---\n");
+						}
 						
-						stackedNode.stack.deleteData(data);
+						bw.write("--- second " + second + " ---");
+						bw.newLine();
+							
+						data = data - loss;
 					}
+				}
+
+				if(!x) {
 					
+					System.out.println("From node " + one.getId() + " to node " + two.getId() + " was sent " + data + " amount of data.");
+
 				} else {
 					
-					int remainingData = data - transmittance;
-					sent = transmittance;
-					rand = r.nextDouble();
-
-					if (faulting != 1.0) {
+					textArea.appendText("From node " + one.getId() + " to node " + two.getId() + " was sent " + data + " amount of data.\n");
+				}
+					
+				bw.write("From node " + one.getId() + " to node " + two.getId() + " was sent " + data + " ammount of data.");
+				bw.newLine();
+					
+				if(two.getId() != last.getId()) {
+					
+					requests.add(new Simulation(second + 1, two.getId(), last.getId(), data, null, first));
+					
+				} else {
 						
-						if (rand < 0.5) {
-							
-							loss = (int) Math.ceil(transmittance / 2.0); 
-							
-							System.out.println("- Overload! -  Half ammount of data must be sent again (" + loss + ").");
-							
-							bw.write("- Overload! -  Half ammount of data must be sent again (" + loss + ").");
-							bw.newLine();
-							bw.newLine();
-
-							
-							dataLost += loss;
-							requests.add(new Simulation(second + 1, first.getId(), last.getId(), loss, null, first));
-							
-							if(stackedNode != null) {
-								
-								stackedNode.stack.deleteData(loss);
-							}
-
-							System.out.println("\n--- second " + second + " ---");
-							
-							bw.write("--- second " + second + " ---");
-							bw.newLine();
-							
-							sent = transmittance - loss;
-						}
-					}
-					
-					System.out.println("From node " + one.getId() + " to node " + two.getId() + " was sent " + sent + " ammount of data.");
-					
-					bw.write("From node " + one.getId() + " to node " + two.getId() + " was sent " + sent + " ammount of data.");
-					bw.newLine();
-					
-					if (two.getId() != last.getId()) {
+					if(!x) {
 						
-						requests.add(new Simulation(second + 1, two.getId(), last.getId(), data, null, first));
+						System.out.println("--- Data successfully sent to the target node (path " + first.getId() + " -> " + last.getId() + "). ---");
 
 					} else {
 						
+						textArea.appendText("--- Data successfully sent to the target node (path " + first.getId() + " -> " + last.getId() + "). ---\n");
+					}
+					
+					bw.write("--- Data successfully sent to the target node (path " + first.getId() + " -> " + last.getId() + "). ---");
+					bw.newLine();
+				}
+					
+				if(stackedNode != null) {
+						
+					stackedNode.stack.deleteData(data);
+				}
+					
+			} else {
+					
+				int remainingData = data - transmittance;
+				sent = transmittance;
+				rand = r.nextDouble();
+
+				if (faulting != 1.0) {
+						
+					if (rand < 0.5) {
+							
+						loss = (int) Math.ceil(transmittance / 2.0); 
+							
+						if(!x) {
+							
+							System.out.println("- Overload! -  Half ammount of data must be sent again (" + loss + ").");
+
+						} else {
+							
+							textArea.appendText("- Overload! -  Half ammount of data must be sent again (" + loss + ").");
+						}
+							
+						bw.write("- Overload! -  Half ammount of data must be sent again (" + loss + ").");
+						bw.newLine();
+						bw.newLine();
+							
+						dataLost += loss;
+						requests.add(new Simulation(second + 1, first.getId(), last.getId(), loss, null, first));
+							
+						if(stackedNode != null) {
+								
+							stackedNode.stack.deleteData(loss);
+						}
+
+						if(!x) {
+							
+							System.out.println("\n--- second " + second + " ---");
+
+						} else {
+							
+							textArea.appendText("\n--- second " + second + " ---\n");
+						}
+							
+						bw.write("--- second " + second + " ---");
+						bw.newLine();
+							
+						sent = transmittance - loss;
+					}
+				}
+					
+				if(!x) {
+					
+					System.out.println("From node " + one.getId() + " to node " + two.getId() + " was sent " + sent + " ammount of data.");
+
+				} else {
+					
+					textArea.appendText("From node " + one.getId() + " to node " + two.getId() + " was sent " + sent + " ammount of data.\n");
+				}
+									
+				bw.write("From node " + one.getId() + " to node " + two.getId() + " was sent " + sent + " ammount of data.");
+				bw.newLine();
+					
+				if (two.getId() != last.getId()) {
+						
+					requests.add(new Simulation(second + 1, two.getId(), last.getId(), data, null, first));
+
+				} else {
+					
+					if(!x) {
+						
 						System.out.println("--- Data successfully sent to the target node (path " + first.getId() + " -> " + last.getId() + "). ---");
+
+					} else {
 						
-						bw.write("--- Data successfully sent to the target node (path " + first.getId() + " -> " + last.getId() + "). ---");
-						bw.newLine();					
+						textArea.appendText("--- Data successfully sent to the target node (path " + first.getId() + " -> " + last.getId() + "). ---\n");
 					}
+											
+					bw.write("--- Data successfully sent to the target node (path " + first.getId() + " -> " + last.getId() + "). ---");
+					bw.newLine();					
+				}
 					
-					if(stackedNode != null) {
+				if(stackedNode != null) {
 						
-						stackedNode.stack.deleteData(data);
-					}
+					stackedNode.stack.deleteData(data);
+				}
 					
-					if (!one.stack.addMemory(remainingData)) {
+				if (!one.stack.addMemory(remainingData)) {
+						
+					if(!x) {
 						
 						System.out.println("Memory of node " + one.getId() + " overflowed! Data must be sent again (" +  remainingData + ").");
 						
-						bw.write("Memory of node " + one.getId() + " overflowed! Data must be sent again (" +  remainingData + ").");
-						bw.newLine();
-						
-						dataLost += remainingData;
-						requests.add(new Simulation(second + 1, first.getId(), last.getId(), remainingData, null, first));
-						
-						if(stackedNode != null) {
-							
-							stackedNode.stack.deleteData(remainingData);
-						}
-												
 					} else {
+						
+						textArea.appendText("Memory of node " + one.getId() + " overflowed! Data must be sent again (" +  remainingData + ").\n");
+					}
+											
+					bw.write("Memory of node " + one.getId() + " overflowed! Data must be sent again (" +  remainingData + ").");
+					bw.newLine();
+						
+					dataLost += remainingData;
+					requests.add(new Simulation(second + 1, first.getId(), last.getId(), remainingData, null, first));
+						
+					if(stackedNode != null) {
+							
+						stackedNode.stack.deleteData(remainingData);
+					}
+												
+				} else {
+					
+					if(!x) {
 						
 						System.out.println(remainingData + " ammount of data was saved to memory stack of node " + one.getId() + ".");
 						
-						bw.write(remainingData + " ammount of data was saved to memory stack of node " + one.getId() + ".");
-						bw.newLine();
+					} else {
 						
-						requests.add(new Simulation(second + 1, one.getId(), last.getId(), remainingData, one, first));
+						textArea.appendText(remainingData + " ammount of data was saved to memory stack of node " + one.getId() + ".\n");
+					}
+											
+					bw.write(remainingData + " ammount of data was saved to memory stack of node " + one.getId() + ".");
+					bw.newLine();
 						
-						if(stackedNode != null) {
+					requests.add(new Simulation(second + 1, one.getId(), last.getId(), remainingData, one, first));
+						
+					if(stackedNode != null) {
 							
-							stackedNode.stack.deleteData(remainingData);
-						}
-				  }
-			}
+						stackedNode.stack.deleteData(remainingData);
+					}
+			  }
+		}
 		
 		bw.close();
 		
 		} catch (Exception e) {
 
+			if(!x) {
+				
 				System.err.println("Failed! Data aren´t recorded in the file.");
+
+			} else {
+				
+				textArea.appendText("Failed! Data aren´t recorded in the file.\n");
+			}
 		} 
 	}
 
-	public static int writeFaulting() {
+	/**
+	 * This method is writing total sum of faulting.
+	 * 
+	 * @param x  If false print into console, else into GUI.
+	 * @param textArea  TextArea of GUI.
+	 * 
+	 * @return  Total sum of faulting.
+	 */
+	public static int writeFaulting(boolean x, TextArea textArea) {
 		
 		try (BufferedWriter bw = new BufferedWriter(new FileWriter("simulation.txt", true))) {
 			
-			System.out.println("\nFaulting this solution is " + dataLost + ".");
-			System.out.println("\nSimulation finished !!!");
-			System.out.println();
+			if(!x) {
+				
+				System.out.println("\nFaulting this solution is " + dataLost + ".");
+				System.out.println("\nSimulation finished !!!");
+				System.out.println();
+				
+			} else {
+				
+				textArea.appendText("\nFaulting this solution is " + dataLost + ". \n");
+				textArea.appendText("\nSimulation finished !!! \n");
+			}
 			
 			bw.newLine();
 			bw.write("Faulting this solution is " + dataLost + ".");
@@ -324,7 +458,14 @@ public class SendingData {
 		
 		} catch (Exception e) {
 
-			System.err.println("Failed! Data aren´t recorded in the file.");
+			if(!x) {
+				
+				System.err.println("Failed! Data aren´t recorded in the file.");
+
+			} else {
+				
+				textArea.appendText("Failed! Data aren´t recorded in the file.\n");
+			}			
 		}
 		
 		return dataLost;

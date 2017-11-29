@@ -26,6 +26,7 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -33,7 +34,7 @@ import javafx.stage.Stage;
 
 /**
  * Class creating graphical user interface
- * for better manipulation with programm.
+ * for better manipulation with programme.
  *
  * @author  Pavel Prùcha and Tomáš Slíva
  */
@@ -43,16 +44,16 @@ public class GUI extends Application {
 	private Stage loadingStage, mainStage;
 	
 	/** Labels of GUI. */
-	private Label entryLB, simulationLB, textLB;
+	private Label entryLB, simulationLB, textLB, removeEdgeLB, removeEdgeDashLB;
 	
 	/** TextFields of GUI. */
-	private TextField entryTF, simulationTF, watchNodeTF;
+	private TextField entryTF, simulationTF, watchNodeTF, removeEdgeTF1, removeEdgeTF2;
 	
 	/** Buttons of GUI. */
 	private Button start, simulate, removeEdge, watchNode;
 	
 	/** TextArea of GUI. */
-	private TextArea textArea;
+	public static TextArea textArea;
 	
 	/** Name of entry file. */
 	public String entryFile;
@@ -80,6 +81,11 @@ public class GUI extends Application {
 	 */
 	@Override
 	public void start(Stage loadingStage) throws Exception {
+		
+		if(hide == 1) {
+			
+			mainStage.close();
+		}
 		
 		loadingStage.setTitle("PT - Prùcha, Slíva");
 		loadingStage.setScene(getScene());
@@ -167,8 +173,7 @@ public class GUI extends Application {
 		entryLB = new Label("Name of entry file:");
 		entryLB.setFont(new Font("Calibri", 16));
 		
-		entryTF = new TextField();
-		entryTF.setPromptText("entryName.txt");
+		entryTF = new TextField("entryTest.txt");
 		
 		entryBox.getChildren().add(entryLB);
 		entryBox.getChildren().add(entryTF);
@@ -180,8 +185,7 @@ public class GUI extends Application {
 		simulationLB = new Label("Name of simulation file:");
 		simulationLB.setFont(new Font("Calibri", 16));
 		
-		simulationTF = new TextField();
-		simulationTF.setPromptText("simulationName.txt");
+		simulationTF = new TextField("simulationTest.txt");
 		
 		simulationBox.getChildren().add(simulationLB);
 		simulationBox.getChildren().add(simulationTF);
@@ -227,13 +231,13 @@ public class GUI extends Application {
 	
 
 	/**
-	 * This method is ending programm nicely.
+	 * This method is ending programme nicely.
 	 */
 	private void exit() {
 		
 		Alert confirmation = new Alert(AlertType.CONFIRMATION);
-		confirmation.setTitle("Exiting programm");
-		confirmation.setHeaderText("Do you really want to exit programm?");
+		confirmation.setTitle("Exiting programme");
+		confirmation.setHeaderText("Do you really want to exit programme?");
 		
 		Optional <ButtonType> choose = confirmation.showAndWait();
 		
@@ -244,20 +248,20 @@ public class GUI extends Application {
 	}
 	
 	/**
-	 * This method is returning basic information about programm.
+	 * This method is returning basic information about programme.
 	 */
 	private void getInfo() {
 		
 		Alert information = new Alert(AlertType.INFORMATION);
 		information.setTitle("PT - Prùcha, Slíva");
-		information.setHeaderText("Information about programm:");
-		information.setContentText("This programm evaluates the shortest paths and handles all data requests between nodes."); 
+		information.setHeaderText("Information about programme:");
+		information.setContentText("This programme evaluates the shortest paths and handles all data requests between nodes."); 
 		information.showAndWait();
 	}
 	
 	/**
 	 * This method is loading names of entry
-	 * files and starting main programm.
+	 * files and starting main programme.
 	 */
 	private void startApp() {
 		
@@ -302,20 +306,54 @@ public class GUI extends Application {
 	}
 
 	/**
+	 * Returns layout of main screen.
 	 * 
-	 * 
-	 * @return
+	 * @return  Layout of main screen.
 	 */
 	private Parent getMainBorderPane() {
 
 		BorderPane borderPaneMain = new BorderPane();
 		
-		borderPaneMain.setTop(getTop());
+		borderPaneMain.setTop(getMainTop());
 		borderPaneMain.setLeft(getLeft());
 		borderPaneMain.setRight(getRight());
 		borderPaneMain.setBackground(new Background(new BackgroundFill(Color.web("#B1D8FD"), CornerRadii.EMPTY, Insets.EMPTY)));
 		
 		return borderPaneMain;
+	}
+
+	private Node getMainTop() {
+
+		MenuBar menuBar = new MenuBar();
+		
+		Menu newMenu = new Menu("_Menu");
+		
+		MenuItem exit = new MenuItem("_Exit"); 
+		
+		exit.setOnAction(event -> exit());
+		exit.setAccelerator(new KeyCodeCombination(KeyCode.X, KeyCombination.ALT_DOWN));
+		
+		MenuItem reset = new MenuItem("_Reset"); 
+		
+		reset.setOnAction(event -> reset());
+		reset.setAccelerator(new KeyCodeCombination(KeyCode.R, KeyCombination.ALT_DOWN));
+		
+		newMenu.getItems().add(exit);
+		newMenu.getItems().add(reset);
+		
+		Menu info = new Menu("I_nfo");
+		
+		MenuItem about = new MenuItem("_About");
+		
+		about.setOnAction(event -> getInfo());
+		about.setAccelerator(new KeyCodeCombination(KeyCode.O, KeyCombination.ALT_DOWN));
+		
+		info.getItems().add(about);
+		
+		menuBar.getMenus().add(newMenu);
+		menuBar.getMenus().add(info);
+		
+		return menuBar;
 	}
 
 	/**
@@ -332,7 +370,7 @@ public class GUI extends Application {
 		textArea = new TextArea();
 		
 		textArea.setEditable(false);
-		textArea.setPrefWidth(430);
+		textArea.setPrefWidth(400);
 		textArea.setPrefHeight(550);
 		
 		box.getChildren().add(textLB);
@@ -346,13 +384,13 @@ public class GUI extends Application {
 	}
 
 	/**
-	 * Returns buttons for manipulating with programm.
+	 * Returns buttons for manipulating with programme.
 	 * 
 	 * @return  Buttons of main stage.
 	 */
 	private Node getRight() {
 
-		VBox box = new VBox();
+		VBox vbox = new VBox();
 		
 		simulate = new Button("Simulate");
 		
@@ -361,6 +399,26 @@ public class GUI extends Application {
 		simulate.setFont(new Font("Calibri", 16));
 		
 		simulate.setOnAction(event -> startSimulation());
+		
+		removeEdgeLB = new Label("Edge between nodes:");
+		
+		HBox hbox = new HBox();
+		
+		removeEdgeTF1 = new TextField();
+		removeEdgeTF1.setMaxWidth(50);
+		
+		removeEdgeDashLB = new Label("-");
+		
+		removeEdgeTF2 = new TextField();
+		removeEdgeTF2.setMaxWidth(50);
+		
+		hbox.getChildren().add(removeEdgeTF1);
+		hbox.getChildren().add(removeEdgeDashLB);
+		hbox.getChildren().add(removeEdgeTF2);
+		
+		hbox.setSpacing(8);
+		hbox.setPadding(new Insets(0, 20, 0, 20));
+		hbox.setAlignment(Pos.CENTER);
 		
 		removeEdge = new Button("Remove edge");
 		
@@ -371,7 +429,6 @@ public class GUI extends Application {
 		removeEdge.setOnAction(event -> Graph.removeEdge());
 		
 		watchNodeTF = new TextField();
-		watchNodeTF.setPromptText("Watch node: 1 - 10");
 		watchNodeTF.setMaxWidth(120);
 		
 		watchNode = new Button("Watch node");
@@ -382,22 +439,52 @@ public class GUI extends Application {
 		
 		watchNode.setOnAction(event -> SendingData.watchNode());
 		
-		box.getChildren().add(simulate);
-		box.getChildren().add(removeEdge);
-		box.getChildren().add(watchNodeTF);
-		box.getChildren().add(watchNode);
+		vbox.getChildren().add(simulate);
+		vbox.getChildren().add(removeEdge);
+		vbox.getChildren().add(removeEdgeLB);
+		vbox.getChildren().add(hbox);
+		vbox.getChildren().add(watchNode);
+		vbox.getChildren().add(watchNodeTF);
 		
-		box.setSpacing(20);
-		box.setPadding(new Insets(0, 20, 0, 20));
-		box.setAlignment(Pos.CENTER);
 		
-		return box;
+		vbox.setSpacing(10);
+		vbox.setPadding(new Insets(0, 20, 0, 20));
+		vbox.setAlignment(Pos.CENTER);
+		
+		return vbox;
+	}
+	
+	/**
+	 * This method is returning back to the start stage.
+	 */
+	private void reset() {
+		
+		Alert confirmation = new Alert(AlertType.CONFIRMATION);
+		confirmation.setTitle("Reset application");
+		confirmation.setHeaderText("Do you really want to reset application?");
+		
+		Optional <ButtonType> choose = confirmation.showAndWait();
+		
+		if (choose.get() == ButtonType.OK) {
+			
+			try {
+				
+				start(loadingStage);
+			
+			} catch (Exception e) {
+				
+				e.printStackTrace();
+			}
+		}
 	}
 
+	/**
+	 * This method is creating process of all requests.
+	 */
 	private void startSimulation() {
 		
-	//	DataInput.loadEntryValues();
+		DataInput.loadEntryValues(entryFile, true, textArea);
 		
-	//	SimulationInput.loadSimulation();
+		SimulationInput.loadSimulation(simulationFile, true, textArea);
 	}
 }

@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import javafx.scene.control.TextArea;
+
 /**
  * Class loading entry values of simulation flow rate of computer web.
  * Result of this class is the shortest path between selected nodes.
@@ -31,13 +33,29 @@ public class SimulationInput {
 	 * This method is loading entry values of simulation
 	 * from the file. These values are evaluated and we 
 	 * get the shortest path between selected nodes.
+	 * 
+	 * @param simulationFile  Name of simulation file.
+	 * @param x  If false print into console, else into GUI.
+	 * @param textArea  TextArea of GUI.
 	 */
-	public static void loadSimulation() {
+	public static void loadSimulation(String simulationFile, boolean x, TextArea textArea) {
 
-		System.out.println();
-		System.out.println("Please, write a name of simulation file: ");
-		String simulation = sc.next();
+		String simulation;
+		
+		if(!x) {
+			
+			System.out.println();
+			System.out.println("Please, write a name of simulation file: ");
+			String simulation1 = sc.next();
+			System.out.println();
+			simulation = simulation1;
+			
+		} else {
 
+			String simulation1 = simulationFile;
+			simulation = simulation1;
+		}
+		
 		try (BufferedReader br = new BufferedReader(new FileReader(simulation))) {
 
 			String row;
@@ -54,13 +72,21 @@ public class SimulationInput {
 				requests.add(new Simulation(time, source, target, data, null, null));
 			}
 			
-			SendingData.completeRequests();
-			SendingData.writeFaulting();
+			SendingData.completeRequests(x, textArea);
+			SendingData.writeFaulting(x, textArea);
 			
 		} catch(FileNotFoundException e) {
 
 			e.printStackTrace();
-			System.err.println("File not found.");
+			
+			if(!x) {
+				
+				System.err.println("Simulation file not found!");
+				
+			} else {
+				
+				textArea.appendText("Simulation file not found!");
+			}
 
 		} catch (IOException e) {
 

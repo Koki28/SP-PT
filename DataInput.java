@@ -6,6 +6,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Scanner;
 
+import javafx.scene.control.TextArea;
+
 /**
  * Class loading entry values of computer web.
  * Entry values are inserted into the graph.
@@ -29,12 +31,27 @@ public class DataInput {
 	/**
 	 * This method is loading entry values from the file.
 	 * These values are inserted into the graph.
+	 * 
+	 * @param entryFile  Name of entry file.
+	 * @param x  If false print into console, else into GUI.
+	 * @param textArea  TextArea of GUI.
 	 */
-	public static void loadEntryValues() {
+	public static void loadEntryValues(String entryFile, boolean x, TextArea textArea) {
 		
-		System.out.println("Please, write a name of entry file: ");
-		String entry = sc.next();
-		System.out.println();
+		String entry;
+		
+		if(!x) {
+			
+			System.out.println("Please, write a name of entry file: ");
+			String entry1 = sc.next();
+			System.out.println();
+			entry = entry1;
+			
+		} else {
+			
+			String entry1 = entryFile;
+			entry = entry1;
+		}
 		
 		try (BufferedReader br = new BufferedReader(new FileReader(entry))) {
 		
@@ -62,17 +79,25 @@ public class DataInput {
 				graph.adjacentNodes(graph.getNode(startNode), graph.getNode(targetNode));
 		    }
 			
-			graph.printEdges();
+			graph.printEdges(x, textArea);
 			
 			for(int i = 1; i < count; i++) {
 				
-				graph.printNeighbours(graph.getNode(i));
+				graph.printNeighbours(graph.getNode(i), x, textArea);
 			}
-			
+				
 		} catch(FileNotFoundException e) {
 		
 			e.printStackTrace();
-			System.err.println("File not found.");
+			
+			if(!x) {
+				
+				System.err.println("Entry file not found!");
+				
+			} else {
+				
+				textArea.appendText("Entry file not found!");
+			}
 		
 		} catch (IOException e) {
 		
