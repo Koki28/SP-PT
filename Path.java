@@ -45,7 +45,7 @@ public class Path {
 	 */
 	public Path() {
 		
-		this.nodes = new ArrayList <Node>(graph.nodes);
+		this.nodes = new ArrayList <Node>(Graph.nodes);
 		this.edges = new ArrayList <Edge>(graph.edges);
 	}
 

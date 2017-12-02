@@ -368,7 +368,7 @@ public class GUI extends Application {
 		removeEdge.setPrefHeight(50);
 		removeEdge.setFont(new Font("Calibri", 16));
 		
-		removeEdge.setOnAction(event -> Graph.removeEdge());
+		removeEdge.setOnAction(event -> Graph.removeEdge(removeEdgeTF1.getText(), removeEdgeTF2.getText(), textArea));
 		
 		watchNodeTF = new TextField();
 		watchNodeTF.setMaxWidth(120);
@@ -379,7 +379,7 @@ public class GUI extends Application {
 		watchNode.setPrefHeight(50);
 		watchNode.setFont(new Font("Calibri", 16));
 		
-		watchNode.setOnAction(event -> SendingData.watchNode());
+		watchNode.setOnAction(event -> SendingData.watchNode(watchNodeTF.getText(), textArea));
 		
 		vbox.getChildren().add(simulate);
 		vbox.getChildren().add(removeEdge);

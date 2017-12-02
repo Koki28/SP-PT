@@ -14,18 +14,18 @@ import javafx.scene.control.TextArea;
 public class Graph {
 
 	/** List of all nodes. */
-	public List <Node> nodes;
+	public static List <Node> nodes;
 	
 	/** List of all edges. */
-	public List <Edge> edges;
+	public static List <Edge> edges;
 
 	/**
 	 * Constructor creating graph of computer web.
 	 */
 	public Graph() {
 
-		this.nodes = new ArrayList <Node>();
-		this.edges = new ArrayList <Edge>();
+		Graph.nodes = new ArrayList <Node>();
+		Graph.edges = new ArrayList <Edge>();
 	}
 
 	/**
@@ -120,7 +120,7 @@ public class Graph {
 	 * 
 	 * @return  Selected node.
 	 */
-	public Node getNode(int id) {
+	public static Node getNode(int id) {
 
 		Node node = null;
 
@@ -193,7 +193,7 @@ public class Graph {
 	 * 
 	 * @return  Edge between two selected nodes.
 	 */
-	public Edge getEdge(Node startNode, Node targetNode) {
+	public static Edge getEdge(Node startNode, Node targetNode) {
 
 		Edge edge = null;
 
@@ -211,10 +211,35 @@ public class Graph {
 	}
 
 	/**
-	 * udìlat
+	 * 
+	 * 
+	 * @param text1
+	 * @param text2
+	 * @param textArea
 	 */
-	public static void removeEdge() {
+	public static void removeEdge(String text1, String text2, TextArea textArea) {
+		int startNode = Integer.parseInt(text1);
+		int targetNode = Integer.parseInt(text2);
 		
+		if (getEdge(getNode(startNode), getNode(targetNode)) != null) {
+			edges.remove(getEdge(getNode(startNode), getNode(targetNode)));
+			edges.remove(getEdge(getNode(targetNode), getNode(startNode)));
+			textArea.appendText("\nEdge " + startNode + " - " + targetNode + " was removed.\n");
+		}
+		else {
+			textArea.appendText("\nEdge " + startNode + " - " + targetNode + " doesn´t exist!\n");
+		}
 		
 	}
+
+	/**
+	 * Returns list of nodes.
+	 * 
+	 * @return  List of nodes.
+	 */
+	public static List<Node> getNodes() {
+		
+		return nodes;
+	}
+
 }

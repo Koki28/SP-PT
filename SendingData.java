@@ -65,12 +65,13 @@ public class SendingData {
 
 						if(dijkstra == null) {
 
-							System.out.println("Path doesn´t exist.");
+							System.out.println("\nPath doesn´t exist.");
 					
 							bw.newLine();
-							bw.write("Path doesn´t exist.");
+							bw.write("\nPath doesn´t exist.");
 							
-							return;
+							requests.set(i, null);
+							continue;
 						}
 					
 						Node first;
@@ -150,12 +151,12 @@ public class SendingData {
 
 						if(dijkstra == null) {
 
-							textArea.appendText("Path doesn´t exist.");
+							textArea.appendText("\nPath doesn´t exist.");
 					
 							bw.newLine();
-							bw.write("Path doesn´t exist.");
-							
-							return;
+							bw.write("\nPath doesn´t exist.");
+							requests.set(i, null);
+							continue;
 						}
 					
 						Node firstNode;
@@ -601,10 +602,17 @@ public static void sendData(int time, int data, List <Node> dijkstra, Node stack
 		}
 	}
 
-	/**
-	 * udìlat
-	 */
-	public static void watchNode() {
+	public static void watchNode(String text, TextArea textArea) {
+		int stackMemory = 0;
+		int nodeId = Integer.parseInt(text);
 		
+		if (Graph.getNode(nodeId) == null) {
+			textArea.appendText("\nNode " + nodeId + " doesn´t exist!\n");
+			return;
+		}
+		
+		stackMemory = Graph.getNode(nodeId).stack.dataInfo();
+		textArea.appendText("\nMemory of node " + nodeId + " is " + stackMemory + "\n");
 	}
+
 }

@@ -42,4 +42,14 @@ public class Stack {
 		
 		memorySum -= data;
 	}
+	
+	/**
+	 * This method gives info about memory.
+	 * 
+	 * @return  Info about memory.
+	 */
+	public int dataInfo() {
+		
+		return MAX_MEMORY - memorySum;
+	}
 }

@@ -50,20 +50,34 @@ public class DataInput {
 		try (BufferedReader br = new BufferedReader(new FileReader(entry))) {
 		
 			String row;
-			int count = 0;
 			
 			graph = new Graph();
 			
 			while((row = br.readLine()) != null) {
 				
-				count++;
 				
 				String [] data = row.split(" - ");
 				
-				int startNode = Integer.parseInt(data [0]);
-				int targetNode = Integer.parseInt(data [1]);
-				int transmittance = Integer.parseInt(data [2]);
-				double faulting = Double.parseDouble(data [3]);
+				int startNode = 0;
+				int targetNode = 0;
+				int transmittance = 0;
+				double faulting = 0.0;
+				
+				try {
+				startNode = Integer.parseInt(data [0]);
+				targetNode = Integer.parseInt(data [1]);
+				transmittance = Integer.parseInt(data [2]);
+				faulting = Double.parseDouble(data [3]);
+				}
+				catch(IllegalArgumentException e) {
+					System.err.println("\nData are in illegal form\n");
+					continue;
+				}
+				
+				if (startNode <  0 || targetNode < 0 || transmittance < 0 || faulting < 0 || faulting > 1) {
+					System.err.println("\nData are in illegal form\n");
+					continue;
+				}
 				
 				graph.addNode(startNode);
 				graph.addNode(targetNode);
@@ -75,7 +89,7 @@ public class DataInput {
 			
 			graph.printEdges(x, textArea);
 			
-			for(int i = 1; i < count; i++) {
+			for(int i = 1; i < Graph.getNodes().size()+1; i++) {
 				
 				graph.printNeighbours(graph.getNode(i), x, textArea);
 			}
