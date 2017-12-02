@@ -255,6 +255,7 @@ public class GUI extends Application {
 		} else {
 			
 			getMainStage();
+			DataInput.loadEntryValues(entryFile, true, textArea);
 		}
 	}
 
@@ -479,8 +480,6 @@ public class GUI extends Application {
 	 * This method is creating process of all requests.
 	 */
 	private void startSimulation() {
-		
-		DataInput.loadEntryValues(entryFile, true, textArea);
 		
 		SimulationInput.loadSimulation(simulationFile, true, textArea);
 	}
