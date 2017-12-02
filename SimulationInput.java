@@ -57,12 +57,28 @@ public class SimulationInput {
 			while ((row = br.readLine()) != null) {
 
 				String [] array = row.split(" - ");
+					
+				int time = 0;
+				int source = 0;
+				int target = 0;
+				int data = 0;
 
-				int time = Integer.parseInt(array [0]);
-				int source = Integer.parseInt(array [1]);
-				int target = Integer.parseInt(array [2]);
-				int data = Integer.parseInt(array [3]);
-
+				try {
+				time = Integer.parseInt(array [0]);
+				source = Integer.parseInt(array [1]);
+				target = Integer.parseInt(array [2]);
+				data = Integer.parseInt(array [3]);
+				}
+				catch (IllegalArgumentException e) {
+					System.err.println("\nData are in illegal form\n");
+					continue;
+				}
+				
+				if (time <  0 || source < 0 || target < 0 || data < 0) {
+					System.err.println("\nData are in illegal form\n");
+					continue;
+				}
+				
 				requests.add(new Simulation(time, source, target, data, null, null));
 			}
 			
