@@ -290,52 +290,12 @@ public class GUI extends Application {
 
 		BorderPane borderPaneMain = new BorderPane();
 		
-		borderPaneMain.setTop(getMainTop());
+		borderPaneMain.setTop(getTop());
 		borderPaneMain.setLeft(getLeft());
 		borderPaneMain.setRight(getRight());
 		borderPaneMain.setBackground(new Background(new BackgroundFill(Color.web("#B1D8FD"), CornerRadii.EMPTY, Insets.EMPTY)));
 		
 		return borderPaneMain;
-	}
-
-	private Node getMainTop() {
-
-		MenuBar menuBar = new MenuBar();
-		
-		Menu newMenu = new Menu("_Menu");
-		
-		MenuItem exit = new MenuItem("_Exit"); 
-		
-		exit.setOnAction(event -> exit());
-		exit.setAccelerator(new KeyCodeCombination(KeyCode.X, KeyCombination.ALT_DOWN));
-		
-		MenuItem clear = new MenuItem("_Clear"); 
-		
-		clear.setOnAction(event -> clear());
-		clear.setAccelerator(new KeyCodeCombination(KeyCode.C, KeyCombination.ALT_DOWN));
-		
-		MenuItem reset = new MenuItem("_Reset"); 
-		
-		reset.setOnAction(event -> reset());
-		reset.setAccelerator(new KeyCodeCombination(KeyCode.R, KeyCombination.ALT_DOWN));
-		
-		newMenu.getItems().add(exit);
-		newMenu.getItems().add(clear);
-		newMenu.getItems().add(reset);
-		
-		Menu info = new Menu("I_nfo");
-		
-		MenuItem about = new MenuItem("_About");
-		
-		about.setOnAction(event -> getInfo());
-		about.setAccelerator(new KeyCodeCombination(KeyCode.O, KeyCombination.ALT_DOWN));
-		
-		info.getItems().add(about);
-		
-		menuBar.getMenus().add(newMenu);
-		menuBar.getMenus().add(info);
-		
-		return menuBar;
 	}
 
 	/**
@@ -421,59 +381,18 @@ public class GUI extends Application {
 		
 		watchNode.setOnAction(event -> SendingData.watchNode());
 		
-		Button clear = new Button("Clear");
-		
-		clear.setPrefWidth(120);
-		clear.setPrefHeight(50);
-		clear.setFont(new Font("Calibri", 16));
-		
-		clear.setOnAction(event -> clear());
-		
 		vbox.getChildren().add(simulate);
 		vbox.getChildren().add(removeEdge);
 		vbox.getChildren().add(removeEdgeLB);
 		vbox.getChildren().add(hbox);
 		vbox.getChildren().add(watchNode);
 		vbox.getChildren().add(watchNodeTF);
-		vbox.getChildren().add(clear);
 		
 		vbox.setSpacing(10);
-		vbox.setPadding(new Insets(10, 20, 0, 20));
+		vbox.setPadding(new Insets(0, 20, 0, 20));
 		vbox.setAlignment(Pos.CENTER);
 		
 		return vbox;
-	}
-
-	/**
-	 * This method is returning back to the start stage.
-	 */
-	private void reset() {
-		
-		Alert confirmation = new Alert(AlertType.CONFIRMATION);
-		confirmation.setTitle("Reset application");
-		confirmation.setHeaderText("Do you really want to reset application?");
-		
-		Optional <ButtonType> choose = confirmation.showAndWait();
-		
-		if (choose.get() == ButtonType.OK) {
-			
-			try {
-				
-				start(loadingStage);
-			
-			} catch (Exception e) {
-				
-				e.printStackTrace();
-			}
-		}
-	}
-	
-	/**
-	 * This method is clearing text from TextArea.
-	 */
-	private void clear() {
-		
-		textArea.clear();
 	}
 
 	/**

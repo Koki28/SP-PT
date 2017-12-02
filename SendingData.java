@@ -506,13 +506,14 @@ public static void sendData(int time, int data, List <Node> dijkstra, Node stack
 			if(!x) {
 				
 				System.out.println("\nFaulting this solution is " + dataLost + ".");
-				System.out.println("\nSimulation finished !!!");
-				System.out.println();
+				System.out.println("\nSimulation finished !!!\n\n");
+				System.out.println("---------------------------------------------------------------------------");
 				
 			} else {
 				
 				textArea.appendText("\nFaulting this solution is " + dataLost + ". \n");
-				textArea.appendText("\nSimulation finished !!! \n");
+				textArea.appendText("\nSimulation finished !!! \n\n\n\n");
+				textArea.appendText("---------------------------------------------------------------------------\n\n\n");
 			}
 			
 			bw.newLine();
@@ -522,7 +523,13 @@ public static void sendData(int time, int data, List <Node> dijkstra, Node stack
 			bw.write("Simulation finished !!!");
 			bw.newLine();
 			bw.newLine();
+			bw.newLine();
+			bw.write("---------------------------------------------------------------------------");
+			bw.newLine();
+			bw.newLine();
 			bw.close();
+			
+			dataLost = 0;
 		
 		} catch (Exception e) {
 
