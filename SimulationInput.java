@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import javafx.scene.control.TextArea;
@@ -20,15 +21,8 @@ public class SimulationInput {
 	private static Scanner sc = new Scanner(System.in);
 
 	/** List of all requests. */
-	private static ArrayList <Simulation> requests = new ArrayList <Simulation>();
+	private static List <Simulation> requests = new ArrayList <Simulation>();
 	
-	/**
-	 * Empty constructor of class SimulationInput.
-	 */
-	public SimulationInput() {
-		
-	}
-
 	/**
 	 * This method is loading entry values of simulation
 	 * from the file. These values are evaluated and we 
@@ -72,7 +66,15 @@ public class SimulationInput {
 				requests.add(new Simulation(time, source, target, data, null, null));
 			}
 			
-			SendingData.completeRequests(x, textArea);
+			if(!x) {
+				
+				SendingData.completeRequests();
+
+			} else {
+				
+				SendingData.completeRequests(x, textArea);
+			}
+			
 			SendingData.writeFaulting(x, textArea);
 			
 		} catch(FileNotFoundException e) {
@@ -99,7 +101,7 @@ public class SimulationInput {
 	 * 
 	 * @return  List of all requests.
 	 */
-	public static ArrayList <Simulation> getRequests() {
+	public static List<Simulation> getRequests() {
 		
 		return requests;
 	}

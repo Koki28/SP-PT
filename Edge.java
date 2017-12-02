@@ -8,16 +8,16 @@ package sp;
 public class Edge {
 
 	/** Start node of the edge. */
-	private Node startNode;
+	private final Node startNode;
 
 	/** Target node of the edge. */
-	private Node targetNode;
+	private final Node targetNode;
 
 	/** Transmittance of the edge. */
-	private int transmittance;
+	private final int transmittance;
 
 	/** Faulting of the edge. */
-	private double faulting;
+	private final double faulting;
 	
 	/**
 	 * Constructor creating connection between nodes of computer web.

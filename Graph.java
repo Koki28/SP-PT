@@ -1,6 +1,7 @@
 package sp;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javafx.scene.control.TextArea;
 
@@ -13,10 +14,10 @@ import javafx.scene.control.TextArea;
 public class Graph {
 
 	/** List of all nodes. */
-	public ArrayList <Node> nodes;
+	public List <Node> nodes;
 	
 	/** List of all edges. */
-	public ArrayList <Edge> edges;
+	public List <Edge> edges;
 
 	/**
 	 * Constructor creating graph of computer web.
@@ -210,7 +211,7 @@ public class Graph {
 	}
 
 	/**
-	 * 
+	 * udìlat
 	 */
 	public static void removeEdge() {
 		

@@ -1,6 +1,7 @@
 package sp;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Instance of class {@code Node} representing nodes of computer web.
@@ -16,7 +17,7 @@ public class Node {
     public Stack stack;
     
     /** List of adjacent nodes. */
-	public ArrayList <Node> neighbours;
+	public List <Node> neighbours;
 	
    /**
     * Constructor creating node of computer web.

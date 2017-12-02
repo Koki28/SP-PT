@@ -9,54 +9,28 @@ package sp;
 public class Stack {
 
 	/** Sum memory of node. */
-	private int memory;
+	private int memorySum;
 	
 	/** Maximum memory stack of node */
 	private final int MAX_MEMORY = 800;
 	
 	/**
-	 * Constructor creating memory stack of node.
-	 */
-	public Stack() {
-
-	}
-	
-	/**
 	 * This method is adding memory to the memory
 	 * stack, when all memory isn´t sent in one step.
 	 * 
-	 * @param addMemory  Memory in addition.
+	 * @param memory  Memory in addition.
 	 * 
 	 * @return  True or false.
 	 */
-	public boolean addMemory(int addMemory) {
+	public boolean addMemory(int memory) {
 		
-		if(checkMemory(addMemory)) {
+		if((memory + memorySum) > MAX_MEMORY) {
 			
-			memory += addMemory;
+			memorySum += memory;
 			return true;
-
-		} else {
-			
-			return false;
 		}
-	}
-	
-	/**
-	 * This method is checking if the memory stack is full or not.
-	 * 
-	 * @param addMemory  Memory in addition.
-	 * 
-	 * @return  True or false.
-	 */
-	public boolean checkMemory(int addMemory) {
 		
-		 if((addMemory + memory) > MAX_MEMORY) {
-			 
-			 return false;
-		 }
-		
-		return true;
+		return false;
 	}
 
 	/**
@@ -66,6 +40,6 @@ public class Stack {
 	 */
 	public void deleteData(int data) {
 		
-		memory -= data;
+		memorySum -= data;
 	}
 }

@@ -2,35 +2,18 @@ package sp;
 
 import java.util.Optional;
 
-import javafx.application.Application;
-import javafx.application.Platform;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
+import javafx.application.*;
+import javafx.geometry.*;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
+import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Label;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuBar;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyCodeCombination;
-import javafx.scene.input.KeyCombination;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.CornerRadii;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.input.*;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import javafx.stage.Stage;
+import javafx.stage.Stage; 
 
 /**
  * Class creating graphical user interface
@@ -43,14 +26,8 @@ public class GUI extends Application {
 	/** Stages of GUI. */
 	private Stage loadingStage, mainStage;
 	
-	/** Labels of GUI. */
-	private Label entryLB, simulationLB, textLB, removeEdgeLB, removeEdgeDashLB;
-	
 	/** TextFields of GUI. */
 	private TextField entryTF, simulationTF, watchNodeTF, removeEdgeTF1, removeEdgeTF2;
-	
-	/** Buttons of GUI. */
-	private Button start, simulate, removeEdge, watchNode;
 	
 	/** TextArea of GUI. */
 	public static TextArea textArea;
@@ -170,7 +147,7 @@ public class GUI extends Application {
 		
 		VBox entryBox = new VBox();
 		
-		entryLB = new Label("Name of entry file:");
+		Label entryLB = new Label("Name of entry file:");
 		entryLB.setFont(new Font("Calibri", 16));
 		
 		entryTF = new TextField("entryTest.txt");
@@ -182,7 +159,7 @@ public class GUI extends Application {
 		
 		VBox simulationBox = new VBox();
 		
-		simulationLB = new Label("Name of simulation file:");
+		Label simulationLB = new Label("Name of simulation file:");
 		simulationLB.setFont(new Font("Calibri", 16));
 		
 		simulationTF = new TextField("simulationTest.txt");
@@ -213,7 +190,7 @@ public class GUI extends Application {
 
 		VBox startBox = new VBox();
 		
-		start = new Button("Start");
+		Button start = new Button("Start");
 		
 		start.setPrefWidth(100);
 		start.setPrefHeight(50);
@@ -301,8 +278,6 @@ public class GUI extends Application {
 		mainStage.show();
 		
 		hide = 1;
-		
-		this.mainStage = mainStage;
 	}
 
 	/**
@@ -333,12 +308,18 @@ public class GUI extends Application {
 		exit.setOnAction(event -> exit());
 		exit.setAccelerator(new KeyCodeCombination(KeyCode.X, KeyCombination.ALT_DOWN));
 		
+		MenuItem clear = new MenuItem("_Clear"); 
+		
+		clear.setOnAction(event -> clear());
+		clear.setAccelerator(new KeyCodeCombination(KeyCode.C, KeyCombination.ALT_DOWN));
+		
 		MenuItem reset = new MenuItem("_Reset"); 
 		
 		reset.setOnAction(event -> reset());
 		reset.setAccelerator(new KeyCodeCombination(KeyCode.R, KeyCombination.ALT_DOWN));
 		
 		newMenu.getItems().add(exit);
+		newMenu.getItems().add(clear);
 		newMenu.getItems().add(reset);
 		
 		Menu info = new Menu("I_nfo");
@@ -365,7 +346,7 @@ public class GUI extends Application {
 		
 		VBox box = new VBox();
 		
-		textLB = new Label("Running simulation:");
+		Label textLB = new Label("Running simulation:");
 		
 		textArea = new TextArea();
 		
@@ -392,7 +373,7 @@ public class GUI extends Application {
 
 		VBox vbox = new VBox();
 		
-		simulate = new Button("Simulate");
+		Button simulate = new Button("Simulate");
 		
 		simulate.setPrefWidth(120);
 		simulate.setPrefHeight(50);
@@ -400,14 +381,14 @@ public class GUI extends Application {
 		
 		simulate.setOnAction(event -> startSimulation());
 		
-		removeEdgeLB = new Label("Edge between nodes:");
+		Label removeEdgeLB = new Label("Edge between nodes:");
 		
 		HBox hbox = new HBox();
 		
 		removeEdgeTF1 = new TextField();
 		removeEdgeTF1.setMaxWidth(50);
 		
-		removeEdgeDashLB = new Label("-");
+		Label removeEdgeDashLB = new Label("-");
 		
 		removeEdgeTF2 = new TextField();
 		removeEdgeTF2.setMaxWidth(50);
@@ -420,7 +401,7 @@ public class GUI extends Application {
 		hbox.setPadding(new Insets(0, 20, 0, 20));
 		hbox.setAlignment(Pos.CENTER);
 		
-		removeEdge = new Button("Remove edge");
+		Button removeEdge = new Button("Remove edge");
 		
 		removeEdge.setPrefWidth(120);
 		removeEdge.setPrefHeight(50);
@@ -431,7 +412,7 @@ public class GUI extends Application {
 		watchNodeTF = new TextField();
 		watchNodeTF.setMaxWidth(120);
 		
-		watchNode = new Button("Watch node");
+		Button watchNode = new Button("Watch node");
 		
 		watchNode.setPrefWidth(120);
 		watchNode.setPrefHeight(50);
@@ -439,21 +420,29 @@ public class GUI extends Application {
 		
 		watchNode.setOnAction(event -> SendingData.watchNode());
 		
+		Button clear = new Button("Clear");
+		
+		clear.setPrefWidth(120);
+		clear.setPrefHeight(50);
+		clear.setFont(new Font("Calibri", 16));
+		
+		clear.setOnAction(event -> clear());
+		
 		vbox.getChildren().add(simulate);
 		vbox.getChildren().add(removeEdge);
 		vbox.getChildren().add(removeEdgeLB);
 		vbox.getChildren().add(hbox);
 		vbox.getChildren().add(watchNode);
 		vbox.getChildren().add(watchNodeTF);
-		
+		vbox.getChildren().add(clear);
 		
 		vbox.setSpacing(10);
-		vbox.setPadding(new Insets(0, 20, 0, 20));
+		vbox.setPadding(new Insets(10, 20, 0, 20));
 		vbox.setAlignment(Pos.CENTER);
 		
 		return vbox;
 	}
-	
+
 	/**
 	 * This method is returning back to the start stage.
 	 */
@@ -476,6 +465,14 @@ public class GUI extends Application {
 				e.printStackTrace();
 			}
 		}
+	}
+	
+	/**
+	 * This method is clearing text from TextArea.
+	 */
+	private void clear() {
+		
+		textArea.clear();
 	}
 
 	/**

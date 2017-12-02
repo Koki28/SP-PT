@@ -23,12 +23,6 @@ public class DataInput {
 	public static Scanner sc = new Scanner(System.in);
 	
 	/**
-	 * Empty constructor of class DataInput.
-	 */
-	public DataInput() {
-	}
-	
-	/**
 	 * This method is loading entry values from the file.
 	 * These values are inserted into the graph.
 	 * 

@@ -5,6 +5,9 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * Instance of class {@code Path} representing the shortest
@@ -16,25 +19,25 @@ import java.util.LinkedList;
 public class Path {
 
 	/** Copy of the list of all nodes. */
-	public ArrayList <Node> nodes;
+	public List <Node> nodes;
 	
 	/** Copy of the list of all edges. */
-	public ArrayList <Edge> edges;
+	public List <Edge> edges;
 	
 	/** Set of explored nodes. */
-	private HashSet <Node> explored;
+	private Set <Node> explored;
 	
 	/** Set of unexplored nodes. */
-	private HashSet <Node> unexplored;
+	private Set <Node> unexplored;
 	
 	/** Map of ancestor nodes. */
-	private HashMap <Node, Node> ancestor;
+	private Map <Node, Node> ancestor;
 	
 	/** Map of distance between nodes. */
-	private HashMap <Node, Double> distance;
+	private Map <Node, Double> distance;
 	
 	/** Graph of computer web. */
-	private Graph graph = DataInput.getGraph();
+	private final Graph graph = DataInput.getGraph();
 
     /**
 	 * Constructor creating path with using
@@ -78,7 +81,7 @@ public class Path {
 	 */
 	public void findShortestPath(Node selectedNode) {
         
-		ArrayList <Node> neighbourNodes = getNeighbours(selectedNode);
+		List<Node> neighbourNodes = getNeighbours(selectedNode);
         
 		for(Node target : neighbourNodes) {
            
@@ -105,7 +108,7 @@ public class Path {
             
 			if (edge.getStartNode().equals(selectedNode) && edge.getTargetNode().equals(target)) {
                 
-				return (1 / edge.getTransmittanceDijkstra());
+				return 1 / edge.getTransmittanceDijkstra();
             }
         }
 		
@@ -119,7 +122,7 @@ public class Path {
 	 * 
 	 * @return  List of neighbours of selected node.
 	 */
-	public ArrayList <Node> getNeighbours(Node selectedNode) {
+	public List <Node> getNeighbours(Node selectedNode) {
 		
         ArrayList <Node> neighbours = new ArrayList <Node>();
         
@@ -137,15 +140,15 @@ public class Path {
 	/**
 	 * Returns node with minimal distance.
 	 * 
-	 * @param unexploredNodes  Set of all unexplored nodes.
+	 * @param unexplored  Set of all unexplored nodes.
 	 * 
 	 * @return  Node minimal distance.
 	 */
-	public Node getMinimum(HashSet <Node> unexploredNodes) {
+	public Node getMinimum(Set <Node> unexplored) {
        
 		Node minimalNode = null;
         
-		for(Node selectedNode : unexploredNodes) {
+		for(Node selectedNode : unexplored) {
             
 			if (minimalNode == null) {
                 
@@ -203,7 +206,7 @@ public class Path {
 	 * 
 	 * @return  Sorted list of all nodes to the target node.
 	 */
-	public LinkedList <Node> getPath(Node targetNode) {
+	public List <Node> getPath(Node targetNode) {
         
 		LinkedList <Node> path = new LinkedList <Node>();
         

@@ -9,22 +9,22 @@ package sp;
 public class Simulation {
 
 	/** Starting time of request. */
-	private int time;
+	private final int time;
 	
 	/** Source of request. */
-	private int source;
+	private final int source;
 	
 	/** Target of request. */
-	private int target;
+	private final int target;
 	
 	/** Data package. */
-	private int data;
+	private final int data;
 	
 	/** Node, where is data package saved. */
-	private Node stackedNode;
+	private final Node stackedNode;
 	
 	/** Prime node of default dijkstra. */
-	private Node primeNode;
+	private final Node primeNode;
 	
 	/**
 	 * Constructor creating one request.
