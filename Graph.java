@@ -1,5 +1,8 @@
 package sp;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -252,5 +255,42 @@ public class Graph {
 		
 		return nodes;
 	}
+	
+	/**
+	 * 
+	 * 
+	 */
+	public static void statistic() {
+		
+		try (BufferedWriter bw = new BufferedWriter(new FileWriter("statistic.txt", true))) {
+			
+		int max = 0;
+		int maxNode = 0;
+		
+		bw.write("\n<--------------------------------------->");
+		for (int i = 0; i < nodes.size(); i++) {
+		Node node = nodes.get(i);
+		int nodeId = node.getId();
+		int stackedData = node.transferredData;
+		
+		if (max < stackedData) {
+			max = stackedData;
+			maxNode = nodeId;
+		}
+		bw.write("\nStacked data of node " + nodeId + " are " + stackedData + "\n");
+		}
+		bw.write("\nThe node with the highest load is node " + maxNode);
+		bw.write("\n<--------------------------------------->\n");
+		bw.close();
+		} catch (IOException e) {
+			System.err.println("Failed! Data aren´t recorded in the file.");
+		}
+		
+		for (int i = 0; i < nodes.size(); i++) {
+			nodes.get(i).transferredData = 0;
+		}
+		
+	}
+	
 
 }

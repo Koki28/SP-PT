@@ -13,5 +13,7 @@ public class Main {
 		DataInput.loadEntryValues(null, false, null);
 		
 		SimulationInput.loadSimulation(null, false, null);
+		
+		Graph.statistic();
 	}
 }

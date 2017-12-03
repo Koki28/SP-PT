@@ -261,7 +261,8 @@ public class SendingData {
 
 					packageData = packageData - loss; 
 				}
-
+				
+				one.transferredData += packageData;
 				System.out.println("From node " + one.getId() + " to node " + two.getId() + " was sent " + packageData + " amount of data.");
 
 				bw.write("From node " + one.getId() + " to node " + two.getId() + " was sent " + packageData + " ammount of data.");
@@ -297,14 +298,14 @@ public class SendingData {
 
 					sent = transmittance - loss;
 				}
-
+				one.transferredData += sent;
 				System.out.println("From node " + one.getId() + " to node " + two.getId() + " was sent " + sent + " ammount of data.");
 
 				bw.write("From node " + one.getId() + " to node " + two.getId() + " was sent " + sent + " ammount of data.");
 				bw.newLine();
 
-				endOrAgain(two, last, second, packageData, first, false, null);
-				deleteStack(stackedNode, packageData);
+				endOrAgain(two, last, second, sent, first, false, null);
+				deleteStack(stackedNode, sent);
 
 				if (!one.stack.addMemory(remainingData)) {
 
@@ -319,7 +320,7 @@ public class SendingData {
 					deleteStack(stackedNode, remainingData);
 
 				} else {
-
+					
 					System.out.println(remainingData + " ammount of data was saved to memory stack of node " + one.getId() + ".");
 
 					bw.write(remainingData + " ammount of data was saved to memory stack of node " + one.getId() + ".");
@@ -411,7 +412,8 @@ public class SendingData {
 
 					packageData = packageData - loss;
 				}
-
+				
+				one.transferredData += packageData;
 				textArea.appendText("From node " + one.getId() + " to node " + two.getId() + " was sent " + packageData + " amount of data.\n");
 
 				bw.write("From node " + one.getId() + " to node " + two.getId() + " was sent " + packageData + " ammount of data.");
@@ -448,13 +450,14 @@ public class SendingData {
 					sent = transmittance - loss;
 				}
 
+				one.transferredData += sent;
 				textArea.appendText("From node " + one.getId() + " to node " + two.getId() + " was sent " + sent + " ammount of data.\n");
 
 				bw.write("From node " + one.getId() + " to node " + two.getId() + " was sent " + sent + " ammount of data.");
 				bw.newLine();
 
-				endOrAgain(two, last, second, packageData, first, x, textArea);
-				deleteStack(stackedNode, packageData);
+				endOrAgain(two, last, second, sent, first, x, textArea);
+				deleteStack(stackedNode, sent);
 
 				if (!one.stack.addMemory(remainingData)) {
 
@@ -469,7 +472,6 @@ public class SendingData {
 					deleteStack(stackedNode, remainingData);
 
 				} else {
-
 					textArea.appendText(remainingData + " ammount of data was saved to memory stack of node " + one.getId() + ".\n");
 
 					bw.write(remainingData + " ammount of data was saved to memory stack of node " + one.getId() + ".");

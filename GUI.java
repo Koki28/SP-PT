@@ -401,5 +401,7 @@ public class GUI extends Application {
 	private void startSimulation() {
 		
 		SimulationInput.loadSimulation(simulationFile, true, textArea);
+		
+		Graph.statistic();
 	}
 }
