@@ -19,6 +19,7 @@ public class Node {
     /** List of adjacent nodes. */
 	public List <Node> neighbours;
 	
+	/** Transferred data of node. */
 	public int transferredData;
 	
    /**

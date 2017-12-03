@@ -19,34 +19,23 @@ public class DataInput {
 	/** Graph of computer web. */
 	public static Graph graph;
 	
-	/** Scanner. */
 	public static Scanner sc = new Scanner(System.in);
 	
 	/**
 	 * This method is loading entry values from the file.
 	 * These values are inserted into the graph.
 	 * 
-	 * @param entryFile  Name of entry file.
 	 * @param x  If false print into console, else into GUI.
 	 * @param textArea  TextArea of GUI.
+	 *
+	 * @throws IOException  IOException.
 	 */
-	public static void loadEntryValues(String entryFile, boolean x, TextArea textArea) {
+	public static void loadEntryValues(boolean x, TextArea textArea) throws IOException {
 		
-		String entry;
-		
-		if(!x) {
-			
-			System.out.println("Please, write a name of entry file: ");
-			String entry1 = sc.next();
-			System.out.println();
-			entry = entry1;
-			
-		} else {
-			
-			String entry1 = entryFile;
-			entry = entry1;
-		}
-		
+		System.out.println("Please, write a name of entry file: ");
+		String entry = sc.next();
+		System.out.println();
+
 		try (BufferedReader br = new BufferedReader(new FileReader(entry))) {
 		
 			String row;
@@ -54,7 +43,6 @@ public class DataInput {
 			graph = new Graph();
 			
 			while((row = br.readLine()) != null) {
-				
 				
 				String [] data = row.split(" - ");
 				
@@ -64,18 +52,21 @@ public class DataInput {
 				double faulting = 0.0;
 				
 				try {
-				startNode = Integer.parseInt(data [0]);
-				targetNode = Integer.parseInt(data [1]);
-				transmittance = Integer.parseInt(data [2]);
-				faulting = Double.parseDouble(data [3]);
-				}
-				catch(IllegalArgumentException e) {
-					System.err.println("\nData are in illegal form\n");
+				
+					startNode = Integer.parseInt(data [0]);
+					targetNode = Integer.parseInt(data [1]);
+					transmittance = Integer.parseInt(data [2]);
+					faulting = Double.parseDouble(data [3]);
+				
+				} catch(IllegalArgumentException e) {
+					
+					System.err.println("\nData are in illegal form.\n");
 					continue;
 				}
 				
 				if (startNode <  0 || targetNode < 0 || transmittance < 0 || faulting < 0 || faulting > 1) {
-					System.err.println("\nData are in illegal form\n");
+
+					System.err.println("\nData are in illegal form.\n");
 					continue;
 				}
 				
@@ -89,27 +80,93 @@ public class DataInput {
 			
 			graph.printEdges(x, textArea);
 			
-			for(int i = 1; i < Graph.getNodes().size()+1; i++) {
+			printAllNeighbours(x, textArea);
 				
-				graph.printNeighbours(Graph.getNode(i), x, textArea);
-			}
+		} catch(FileNotFoundException e) {
+		
+			e.printStackTrace();
+		
+			System.err.println("Entry file not found!");	
+		}
+	}
+	
+	/**
+	 * This method is loading entry values from the file.
+	 * These values are inserted into the graph.
+	 * 
+	 * @param entryFile  Name of entry file.
+	 * @param x  If false print into console, else into GUI.
+	 * @param textArea  TextArea of GUI.
+	 * 
+	 * @throws IOException  IOException.
+	 */
+	public static void loadEntryValues(String entryFile, boolean x, TextArea textArea) throws IOException {
+
+		try (BufferedReader br = new BufferedReader(new FileReader(entryFile))) {
+		
+			String row;
+			
+			graph = new Graph();
+			
+			while((row = br.readLine()) != null) {
+				
+				String [] data = row.split(" - ");
+				
+				int startNode = 0;
+				int targetNode = 0;
+				int transmittance = 0;
+				double faulting = 0.0;
+				
+				try {
+				
+					startNode = Integer.parseInt(data [0]);
+					targetNode = Integer.parseInt(data [1]);
+					transmittance = Integer.parseInt(data [2]);
+					faulting = Double.parseDouble(data [3]);
+				
+				} catch(IllegalArgumentException e) {
+					
+					textArea.appendText("Data are in illegal form.\n\n");
+					continue;
+				}
+				
+				if (startNode <  0 || targetNode < 0 || transmittance < 0 || faulting < 0 || faulting > 1) {
+					
+					textArea.appendText("Data are in illegal form.\n\n");
+					continue;
+				}
+				
+				graph.addNode(startNode);
+				graph.addNode(targetNode);
+				
+			    graph.addEdge(Graph.getNode(startNode), Graph.getNode(targetNode), transmittance, faulting);
+				
+				graph.adjacentNodes(Graph.getNode(startNode), Graph.getNode(targetNode));
+		    }
+			
+			graph.printEdges(x, textArea);
+			
+			printAllNeighbours(x, textArea);
 				
 		} catch(FileNotFoundException e) {
 		
 			e.printStackTrace();
 			
-			if(!x) {
-				
-				System.err.println("Entry file not found!");
-				
-			} else {
-				
-				textArea.appendText("Entry file not found!");
-			}
+			textArea.appendText("\nEntry file not found!");
+		}
+	}
+	
+	/**
+	 * This method is printing all neighbours of all nodes.
+	 * 
+	 * @param x  If false print into console, else into GUI.
+	 * @param textArea  TextArea of GUI.
+	 */
+	public static void printAllNeighbours(boolean x, TextArea textArea) {
 		
-		} catch (IOException e) {
-		
-			e.printStackTrace();
+		for(int i = 1; i < Graph.getNodes().size()+1; i++) {
+			
+			graph.printNeighbours(Graph.getNode(i), x, textArea);
 		}
 	}
 	

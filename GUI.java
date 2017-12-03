@@ -1,5 +1,6 @@
 package sp;
 
+import java.io.IOException;
 import java.util.Optional;
 
 import javafx.application.*;
@@ -206,7 +207,6 @@ public class GUI extends Application {
 		return startBox;
 	}
 	
-
 	/**
 	 * This method is ending programme nicely.
 	 */
@@ -255,7 +255,15 @@ public class GUI extends Application {
 		} else {
 			
 			getMainStage();
-			DataInput.loadEntryValues(entryFile, true, textArea);
+			
+			try {
+			
+				DataInput.loadEntryValues(entryFile, true, textArea);
+			
+			} catch (IOException e) {
+				
+				e.printStackTrace();
+			}
 		}
 	}
 
@@ -396,12 +404,12 @@ public class GUI extends Application {
 	}
 
 	/**
-	 * This method is creating process of all requests.
+	 * This method is creating process of all requests and statistics of data.
 	 */
 	private void startSimulation() {
 		
 		SimulationInput.loadSimulation(simulationFile, true, textArea);
-		
+	
 		Graph.statistic();
 	}
 }

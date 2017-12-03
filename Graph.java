@@ -17,17 +17,10 @@ import javafx.scene.control.TextArea;
 public class Graph {
 
 	/** List of all nodes. */
-	public static List <Node> nodes = new ArrayList <Node>();;
+	public static List <Node> nodes = new ArrayList <Node>();
 	
 	/** List of all edges. */
-	public static List <Edge> edges = new ArrayList <Edge>();;
-
-	/**
-	 * Constructor creating graph of computer web.
-	 */
-	public Graph() {
-
-	}
+	public static List <Edge> edges = new ArrayList <Edge>();
 
 	/**
 	 * This method is adding node into the graph
@@ -212,38 +205,42 @@ public class Graph {
 	}
 
 	/**
+	 * This method is removing edge from the graph.
 	 * 
-	 * 
-	 * @param text1
-	 * @param text2
-	 * @param textArea
+	 * @param text1  Text from first TextField for removing edge.
+	 * @param text2  Text from second TextField for removing edge.
+	 * @param textArea  TextArea of GUI.
 	 */
 	public static void removeEdge(String text1, String text2, TextArea textArea) {
 		
 		int startNode = 0;
 		int targetNode = 0;
+		
 		try {
 			
-		startNode = Integer.parseInt(text1);
-		targetNode = Integer.parseInt(text2);
-		}
-		catch (IllegalArgumentException e) {
+			startNode = Integer.parseInt(text1);
+			targetNode = Integer.parseInt(text2);
+		
+		} catch (IllegalArgumentException e) {
+			
 			textArea.appendText("\nNodes are in illegal form!\n");
 			return;
 		}
-		if (startNode > Graph.getNodes().size() || targetNode > Graph.getNodes().size() || startNode <= 0 || targetNode <= 0) {
-			textArea.appendText("\nEdge " + startNode + " - " + targetNode + " doesn´t exist!\n");
-		}
 		
-		else if (getEdge(getNode(startNode), getNode(targetNode)) != null) {
+		if (startNode > Graph.getNodes().size() || targetNode > Graph.getNodes().size() || startNode <= 0 || targetNode <= 0) {
+			
+			textArea.appendText("\nEdge " + startNode + " - " + targetNode + " doesn´t exist!\n");
+		
+		} else if (getEdge(getNode(startNode), getNode(targetNode)) != null) {
+			
 			edges.remove(getEdge(getNode(startNode), getNode(targetNode)));
 			edges.remove(getEdge(getNode(targetNode), getNode(startNode)));
 			textArea.appendText("\nEdge " + startNode + " - " + targetNode + " was removed.\n");
-		}
-		else {
+		
+		} else {
+			
 			textArea.appendText("\nEdge " + startNode + " - " + targetNode + " doesn´t exist!\n");
 		}
-		
 	}
 
 	/**
@@ -251,46 +248,51 @@ public class Graph {
 	 * 
 	 * @return  List of nodes.
 	 */
-	public static List<Node> getNodes() {
+	public static List <Node> getNodes() {
 		
 		return nodes;
 	}
 	
 	/**
-	 * 
-	 * 
+	 * This method is creating statistics of data after completing all requests.
 	 */
 	public static void statistic() {
 		
 		try (BufferedWriter bw = new BufferedWriter(new FileWriter("statistic.txt", true))) {
 			
-		int max = 0;
-		int maxNode = 0;
+			int max = 0;
+			int maxNode = 0;
 		
-		bw.write("\n<--------------------------------------->");
-		for (int i = 0; i < nodes.size(); i++) {
-		Node node = nodes.get(i);
-		int nodeId = node.getId();
-		int stackedData = node.transferredData;
+			bw.write("\n<--------------------------------------->");
+			
+			for (int i = 0; i < nodes.size(); i++) {
 		
-		if (max < stackedData) {
-			max = stackedData;
-			maxNode = nodeId;
-		}
-		bw.write("\nStacked data of node " + nodeId + " are " + stackedData + "\n");
-		}
-		bw.write("\nThe node with the highest load is node " + maxNode);
-		bw.write("\n<--------------------------------------->\n");
-		bw.close();
+				Node node = nodes.get(i);
+				int nodeId = node.getId();
+				int stackedData = node.transferredData;
+		
+				if (max < stackedData) {
+			
+					max = stackedData;
+					maxNode = nodeId;
+				}
+		
+				bw.write("\nStacked data of node " + nodeId + " are " + stackedData + "\n");
+				bw.newLine();
+			}
+		
+			bw.write("\nThe node with the highest load is node " + maxNode);
+			bw.write("\n<--------------------------------------->\n");
+			bw.close();
+		
 		} catch (IOException e) {
+			
 			System.err.println("Failed! Data aren´t recorded in the file.");
 		}
 		
 		for (int i = 0; i < nodes.size(); i++) {
+			
 			nodes.get(i).transferredData = 0;
 		}
-		
 	}
-	
-
 }

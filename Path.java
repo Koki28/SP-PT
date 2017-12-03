@@ -35,8 +35,8 @@ public class Path {
 	
 	/** Map of distance between nodes. */
 	private Map <Node, Double> distance;
-	
-	/**
+
+    /**
 	 * Constructor creating path with using
 	 * copy of all nodes and edges of computer web.
 	 */
