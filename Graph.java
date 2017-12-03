@@ -218,10 +218,24 @@ public class Graph {
 	 * @param textArea
 	 */
 	public static void removeEdge(String text1, String text2, TextArea textArea) {
-		int startNode = Integer.parseInt(text1);
-		int targetNode = Integer.parseInt(text2);
 		
-		if (getEdge(getNode(startNode), getNode(targetNode)) != null) {
+		int startNode = 0;
+		int targetNode = 0;
+		try {
+			
+		startNode = Integer.parseInt(text1);
+		targetNode = Integer.parseInt(text2);
+		}
+		catch (IllegalArgumentException e) {
+			textArea.appendText("\nNodes are in illegal form!\n");
+			return;
+		}
+		
+		if (startNode < 0 || targetNode < 0) {
+			textArea.appendText("\nEdge " + startNode + " - " + targetNode + " doesn´t exist!\n");
+		}
+		
+		else if (getEdge(getNode(startNode), getNode(targetNode)) != null) {
 			edges.remove(getEdge(getNode(startNode), getNode(targetNode)));
 			edges.remove(getEdge(getNode(targetNode), getNode(startNode)));
 			textArea.appendText("\nEdge " + startNode + " - " + targetNode + " was removed.\n");
