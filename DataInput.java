@@ -82,16 +82,16 @@ public class DataInput {
 				graph.addNode(startNode);
 				graph.addNode(targetNode);
 				
-			    graph.addEdge(graph.getNode(startNode), graph.getNode(targetNode), transmittance, faulting);
+			    graph.addEdge(Graph.getNode(startNode), Graph.getNode(targetNode), transmittance, faulting);
 				
-				graph.adjacentNodes(graph.getNode(startNode), graph.getNode(targetNode));
+				graph.adjacentNodes(Graph.getNode(startNode), Graph.getNode(targetNode));
 		    }
 			
 			graph.printEdges(x, textArea);
 			
 			for(int i = 1; i < Graph.getNodes().size()+1; i++) {
 				
-				graph.printNeighbours(graph.getNode(i), x, textArea);
+				graph.printNeighbours(Graph.getNode(i), x, textArea);
 			}
 				
 		} catch(FileNotFoundException e) {

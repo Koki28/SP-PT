@@ -18,9 +18,6 @@ public class SendingData {
 
 	private static Random r = new Random();
 
-	/** Graph of computer web. */
-	private static Graph graph = DataInput.getGraph();
-
 	/** Ammount of lost data. */
 	private static int dataLost = 0;
 
@@ -45,8 +42,8 @@ public class SendingData {
 
 				if(time == timer) {
 
-					Node sourceNode = graph.getNode(requests.get(i).getSource());
-					Node targetNode = graph.getNode(requests.get(i).getTarget());
+					Node sourceNode = Graph.getNode(requests.get(i).getSource());
+					Node targetNode = Graph.getNode(requests.get(i).getTarget());
 					Node stackedNode = requests.get(i).getStackedNode();
 					Node primeNode = requests.get(i).getPrimeNode();
 					int data = requests.get(i).getData();			
@@ -131,8 +128,8 @@ public class SendingData {
 
 				if(time == timer) {
 
-					Node sourceNode = graph.getNode(requests.get(i).getSource());
-					Node targetNode = graph.getNode(requests.get(i).getTarget());
+					Node sourceNode = Graph.getNode(requests.get(i).getSource());
+					Node targetNode = Graph.getNode(requests.get(i).getTarget());
 					Node stackedNode = requests.get(i).getStackedNode();
 					Node primeNode = requests.get(i).getPrimeNode();
 					int data = requests.get(i).getData();			
@@ -228,7 +225,7 @@ public class SendingData {
 			bw.write("Sending data about size <" + packageData + "> from node " +  one.getId() + " to node " + two.getId() + ": ");
 			bw.newLine();
 
-			Edge edge = graph.getEdge(one, two);
+			Edge edge = Graph.getEdge(one, two);
 			int transmittance = edge.getTransmittance(); 	
 			double faulting = edge.getFaulting(); 
 
@@ -378,7 +375,7 @@ public class SendingData {
 			bw.write("Sending data about size <" + packageData + "> from node " +  one.getId() + " to node " + two.getId() + ": ");
 			bw.newLine();
 
-			Edge edge = graph.getEdge(one, two);
+			Edge edge = Graph.getEdge(one, two);
 			int transmittance = edge.getTransmittance(); 	
 			double faulting = edge.getFaulting();
 

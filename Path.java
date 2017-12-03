@@ -36,17 +36,14 @@ public class Path {
 	/** Map of distance between nodes. */
 	private Map <Node, Double> distance;
 	
-	/** Graph of computer web. */
-	private final Graph graph = DataInput.getGraph();
-
-    /**
+	/**
 	 * Constructor creating path with using
 	 * copy of all nodes and edges of computer web.
 	 */
 	public Path() {
 		
 		this.nodes = new ArrayList <Node>(Graph.nodes);
-		this.edges = new ArrayList <Edge>(graph.edges);
+		this.edges = new ArrayList <Edge>(Graph.edges);
 	}
 
 	/**

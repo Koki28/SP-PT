@@ -19,6 +19,8 @@ public class Node {
     /** List of adjacent nodes. */
 	public List <Node> neighbours;
 	
+	public int transferredData;
+	
    /**
     * Constructor creating node of computer web.
     *

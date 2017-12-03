@@ -14,18 +14,16 @@ import javafx.scene.control.TextArea;
 public class Graph {
 
 	/** List of all nodes. */
-	public static List <Node> nodes;
+	public static List <Node> nodes = new ArrayList <Node>();;
 	
 	/** List of all edges. */
-	public static List <Edge> edges;
+	public static List <Edge> edges = new ArrayList <Edge>();;
 
 	/**
 	 * Constructor creating graph of computer web.
 	 */
 	public Graph() {
 
-		Graph.nodes = new ArrayList <Node>();
-		Graph.edges = new ArrayList <Edge>();
 	}
 
 	/**
