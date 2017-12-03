@@ -230,8 +230,7 @@ public class Graph {
 			textArea.appendText("\nNodes are in illegal form!\n");
 			return;
 		}
-		
-		if (startNode < 0 || targetNode < 0) {
+		if (startNode > Graph.getNodes().size() || targetNode > Graph.getNodes().size() || startNode <= 0 || targetNode <= 0) {
 			textArea.appendText("\nEdge " + startNode + " - " + targetNode + " doesn´t exist!\n");
 		}
 		

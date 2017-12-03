@@ -613,13 +613,18 @@ public class SendingData {
 			textArea.appendText("\nNode are in illegal form!\n");
 			return;
 		}
-		if (Graph.getNode(nodeId) == null) {
+		
+		if (nodeId > Graph.getNodes().size() || Graph.getNode(nodeId) == null) {
 			textArea.appendText("\nNode " + nodeId + " doesn´t exist!\n");
 			return;
 		}
 
 		stackMemory = Graph.getNode(nodeId).stack.dataInfo();
 		textArea.appendText("\nMemory of node " + nodeId + " is " + stackMemory + "\n");
+		textArea.appendText("Neighbours of node " + nodeId + " are:\n");
+		for (int i = 0; i < Graph.getNode(nodeId).neighbours.size(); i++) {
+			textArea.appendText(i+1 + ". neighbour -> " +  Graph.getNode(nodeId).neighbours.get(i) + "\n");
+		}
 	}
 
 }
